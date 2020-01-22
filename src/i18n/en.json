@@ -4,5 +4,9 @@
   },
   "nav": {
     "dashboard": "Dashboard"
+  },
+  "global": {
+    "english": "English",
+    "portuguese": "Portuguese"
   }
 }
