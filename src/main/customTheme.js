@@ -14,6 +14,14 @@ export default createMuiTheme({
         color: "#555555",
         backgroundColor: appConstants.BACKGROUND_COLOR
       }
+    },
+    MuiMenuItem: {
+      root: {
+        '&:hover': {
+          backgroundColor: appConstants.MENU_ITEM_HOVER_COLOR,
+          color: 'white'
+        }
+      }
     }
   }
 });

@@ -2,11 +2,16 @@
   "app": {
     "name": "Physio Manager"
   },
-  "nav": {
-    "dashboard": "Dashboard"
+  "topNav": {
+    "myAccount": "A minha conta",
+    "logout": "Sair"
   },
   "global": {
     "english": "Inglês",
-    "portuguese": "Português"
+    "portuguese": "Português",
+    "englishShort": "EN",
+    "portugueseShort": "PT",
+    "englishFull": "(EN) Inglês",
+    "portugueseFull": "(PT) Português"
   }
 }

@@ -1,22 +1,34 @@
-import React, { Component } from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+import React, { Component } from 'react'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import NotificationsIcon from '@material-ui/icons/Notifications'
+import { Translate } from 'react-redux-i18n'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-import "./Header.style.scss";
+import AccountButton from './AccountButton.component'
+import LanguagePicker from './LanguagePicker.component'
+
+import './Header.style.scss'
 
 class Header extends Component {
+  constructor(props) {
+    super(props)
+  }
+
+  changeLanguage = locale => {
+    this.props.actions.setLocale(locale)
+  }
+
   render() {
     return (
       <div className="header">
         <AppBar
           position="static"
-          className="teste"
-          style={{ boxShadow: "none" }}
+          style={{ boxShadow: 'none' }}
         >
           <Toolbar>
             <IconButton
@@ -27,20 +39,23 @@ class Header extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h7" className="tabTitle">
+            <Typography className="tabTitle">
               Tab Title Placeholder
             </Typography>
+
+            <LanguagePicker />
+
             <IconButton>
               <NotificationsIcon />
             </IconButton>
-            <IconButton>
-              <AccountBoxIcon />
-            </IconButton>
+
+            <AccountButton />
+
           </Toolbar>
         </AppBar>
       </div>
-    );
+    )
   }
 }
 
-export default Header;
+export default Header
