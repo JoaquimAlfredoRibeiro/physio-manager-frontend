@@ -13,5 +13,8 @@
     "portugueseShort": "PT",
     "englishFull": "(EN) Inglês",
     "portugueseFull": "(PT) Português"
+  },
+  "dashboard": {
+    "welcome": "Bem-vindo"
   }
 }

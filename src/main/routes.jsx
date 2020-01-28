@@ -1,16 +1,18 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
-import Header from '../components/main/header/Header.component'
 
-import { Translate } from 'react-redux-i18n'
+import Patients from '../components/patients/Patients.component'
+import Navigation from '../components/main/nav/navigation.component'
 
 export default props => (
   <BrowserRouter>
     <div>
-      <Header />
-      <h1>
-        <Translate value={'global.english'} />
-      </h1>
+      <Navigation>
+        <Switch>
+          <Route path="/patients" component={Patients} />
+          <Redirect from="*" to="/" />
+        </Switch>
+      </Navigation>
     </div>
   </BrowserRouter>
 )

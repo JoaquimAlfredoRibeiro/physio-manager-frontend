@@ -18,8 +18,20 @@ export default createMuiTheme({
     MuiMenuItem: {
       root: {
         '&:hover': {
-          backgroundColor: appConstants.MENU_ITEM_HOVER_COLOR,
+          backgroundColor: appConstants.PRIMARY_INFO_LIGHT,
           color: 'white'
+        }
+      }
+    },
+    MuiBadge: {
+      colorPrimary: {
+        backgroundColor: appConstants.PRIMARY_INFO_MAIN
+      }
+    },
+    MuiToolbar: {
+      gutters: {
+        '@media (min-width: 600px)': {
+          paddingRight: '0px'
         }
       }
     }
