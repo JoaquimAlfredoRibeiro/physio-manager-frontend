@@ -1,4 +1,6 @@
 import sidebardImage from '../../../assets/images/Sidebar1.jpg'
+import '../../../appConstants'
+import appConstants from '../../../appConstants';
 
 const drawerWidth = 240;
 
@@ -53,9 +55,9 @@ export default theme => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        width: theme.spacing.unit * 7,
+        width: theme.spacing(7),
         [theme.breakpoints.up('sm')]: {
-            width: theme.spacing.unit * 9,
+            width: theme.spacing(9),
         },
     },
     toolbar: {
@@ -65,12 +67,38 @@ export default theme => ({
         padding: theme.spacing(0, 1),
         ...theme.mixins.toolbar,
     },
+    logoDiv: {
+        display: 'flex',
+        alignItems: 'center',
+        alignContent: 'flex-start',
+        padding: theme.spacing(0, 1),
+        ...theme.mixins.toolbar,
+        marginRight: '5px',
+    },
     content: {
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
-        padding: theme.spacing.unit * 3,
+        padding: theme.spacing(3),
     },
     AppBarTypography: {
         flexGrow: 1,
+    },
+    backgrounColorText: {
+        color: appConstants.BACKGROUND_COLOR,
+        marginLeft: '2px'
+    },
+    sidebarButton: {
+        marginTop: '10px',
+        borderRadius: '5px',
+        "&:hover,&:focus,&:visited,&": {
+            color: '#FFF',
+        },
+        '&:focus': {
+            transitionDelay: '0.25s',
+            backgroundColor: appConstants.PRIMARY_INFO_MAIN,
+        }
+    },
+    sidebarList: {
+        padding: '5px'
     }
 });

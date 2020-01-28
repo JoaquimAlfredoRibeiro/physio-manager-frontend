@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import { withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 
+import { Translate } from 'react-redux-i18n'
+
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -15,15 +17,18 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Badge from '@material-ui/core/Badge'
 import NotificationsIcon from '@material-ui/icons/Notifications'
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import AccountButton from '../header/AccountButton.component'
-import LanguagePicker from '../header/LanguagePicker.component'
+import AccountButton from '../header/AccountButton.component';
+import LanguagePicker from '../header/LanguagePicker.component';
+import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
+import TodayIcon from '@material-ui/icons/Today';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
-
 
 import navigationStyles from './navigation.styles'
 
@@ -54,6 +59,21 @@ class MiniDrawer extends React.Component {
         this.props.history.push(link);
     };
 
+    currentTab(path) {
+        switch (path) {
+            case '/':
+                return <Translate value='tabs.dashboard' />
+            case '/patients':
+                return <Translate value='tabs.patients' />
+            case '/apointments':
+                return <Translate value='tabs.apointments' />
+            case '/pathologies':
+                return <Translate value='tabs.pathologies' />
+            default:
+                return ''
+        }
+    }
+
     render() {
         const { classes } = this.props;
         const { anchorEl } = this.state;
@@ -68,8 +88,8 @@ class MiniDrawer extends React.Component {
                         <IconButton color="inherit" aria-label="Open drawer" onClick={this.handleDrawerOpen} className={classNames(classes.menuButton, this.state.open && classes.hide)} >
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="title" color="inherit" className={classes.AppBarTypography}>
-                            Tab Title Placeholder
+                        <Typography color="inherit" className={classes.AppBarTypography}>
+                            {this.currentTab(this.props.history.location.pathname)}
                         </Typography>
 
                         <LanguagePicker />
@@ -91,21 +111,38 @@ class MiniDrawer extends React.Component {
                     }}
                     open={this.state.open}
                 >
+
                     <div className={classes.toolbar}>
+                        <div className={classes.logoDiv}>
+                            <DirectionsRunIcon color='primary' fontSize='large' />
+                            <h3 className={classes.backgrounColorText}>Physio Manager</h3>
+                        </div>
                         <IconButton onClick={this.handleDrawerClose} aria-owns={open ? 'menu-appbar' : null} >
-                            <ChevronLeftIcon />
+                            <ChevronLeftIcon className={classes.backgrounColorText} />
                         </IconButton>
 
                     </div>
+
                     <Divider />
-                    <ListItem button onClick={() => this.redirect("/")} key={'1'} >
-                        <ListItemIcon ><DashboardIcon /></ListItemIcon>
-                        <ListItemText primary={'Dashboard'} />
-                    </ListItem>
-                    <ListItem button onClick={() => this.redirect("/patients")} key={'2'} >
-                        <ListItemIcon ><AssignmentIndIcon /></ListItemIcon>
-                        <ListItemText primary={'Patients'} />
-                    </ListItem>
+                    <List className={classes.sidebarList}>
+                        <ListItem className={classes.sidebarButton} button onClick={() => this.redirect("/")} key={'1'} >
+                            <ListItemIcon ><DashboardIcon className={classes.backgrounColorText} /></ListItemIcon>
+                            <ListItemText className={classes.backgrounColorText} primary={<Translate value='tabs.dashboard' />} />
+                        </ListItem>
+                        <Divider />
+                        <ListItem className={classes.sidebarButton} button onClick={() => this.redirect("/patients")} key={'2'} >
+                            <ListItemIcon ><AssignmentIndIcon className={classes.backgrounColorText} /></ListItemIcon>
+                            <ListItemText className={classes.backgrounColorText} primary={<Translate value='tabs.patients' />} />
+                        </ListItem>
+                        <ListItem className={classes.sidebarButton} button onClick={() => this.redirect("/apointments")} key={'3'} >
+                            <ListItemIcon ><TodayIcon className={classes.backgrounColorText} /></ListItemIcon>
+                            <ListItemText className={classes.whiteText} primary={<Translate value='tabs.apointments' />} />
+                        </ListItem>
+                        <ListItem className={classes.sidebarButton} button onClick={() => this.redirect("/pathologies")} key={'4'} >
+                            <ListItemIcon ><LocalHospitalIcon className={classes.backgrounColorText} /></ListItemIcon>
+                            <ListItemText className={classes.whiteText} primary={<Translate value='tabs.pathologies' />} />
+                        </ListItem>
+                    </List>
                     <Divider />
                 </Drawer>
                 <main className={classes.content}>

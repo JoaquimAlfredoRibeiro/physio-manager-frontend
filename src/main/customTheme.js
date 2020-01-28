@@ -34,6 +34,11 @@ export default createMuiTheme({
           paddingRight: '0px'
         }
       }
+    },
+    MuiSvgIcon: {
+      colorPrimary: {
+        color: appConstants.PRIMARY_INFO_MAIN
+      }
     }
   }
 });

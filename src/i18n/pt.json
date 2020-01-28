@@ -1,11 +1,4 @@
 {
-  "app": {
-    "name": "Physio Manager"
-  },
-  "topNav": {
-    "myAccount": "A minha conta",
-    "logout": "Sair"
-  },
   "global": {
     "english": "Inglês",
     "portuguese": "Português",
@@ -14,7 +7,29 @@
     "englishFull": "(EN) Inglês",
     "portugueseFull": "(PT) Português"
   },
+  "app": {
+    "name": "Physio Manager"
+  },
+  "topNav": {
+    "myAccount": "A minha conta",
+    "logout": "Sair"
+  },
   "dashboard": {
     "welcome": "Bem-vindo"
+  },
+  "patients": {
+    "welcome": "Povo Quebrado"
+  },
+  "apointments": {
+    "welcome": "Marcar Situações"
+  },
+  "pathologies": {
+    "welcome": "Maleitas e afins"
+  },
+  "tabs": {
+    "dashboard": "Dashboard",
+    "patients": "Pacientes",
+    "apointments": "Marcações",
+    "pathologies": "Patologias"
   }
 }

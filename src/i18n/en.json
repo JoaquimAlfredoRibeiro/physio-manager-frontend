@@ -1,11 +1,4 @@
 {
-  "app": {
-    "name": "Physio Manager"
-  },
-  "topNav": {
-    "myAccount": "My account",
-    "logout": "Logout"
-  },
   "global": {
     "english": "English",
     "portuguese": "Portuguese",
@@ -14,7 +7,29 @@
     "englishFull": "(EN) English",
     "portugueseFull": "(PT) Portuguese"
   },
+  "app": {
+    "name": "Physio Manager"
+  },
+  "topNav": {
+    "myAccount": "My account",
+    "logout": "Logout"
+  },
   "dashboard": {
     "welcome": "Welcome"
+  },
+  "patients": {
+    "welcome": "Broken People"
+  },
+  "apointments": {
+    "welcome": "Schedule People"
+  },
+  "pathologies": {
+    "welcome": "Pathologies all Arround"
+  },
+  "tabs": {
+    "dashboard": "Dashboard",
+    "patients": "Patients",
+    "apointments": "Apointments",
+    "pathologies": "Pathologies"
   }
 }
