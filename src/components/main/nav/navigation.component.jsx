@@ -26,7 +26,6 @@ import LanguagePicker from '../header/LanguagePicker.component';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import TodayIcon from '@material-ui/icons/Today';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
-
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
@@ -72,6 +71,10 @@ class MiniDrawer extends React.Component {
             default:
                 return ''
         }
+    }
+
+    isTabActive(selectedTab) {
+        return (selectedTab === this.props.history.location.pathname)
     }
 
     render() {
@@ -125,22 +128,22 @@ class MiniDrawer extends React.Component {
 
                     <Divider />
                     <List className={classes.sidebarList}>
-                        <ListItem className={classes.sidebarButton} button onClick={() => this.redirect("/")} key={'1'} >
+                        <ListItem className={this.isTabActive('/') ? classes.activeSidebarButton : classes.sidebarButton} button onClick={() => this.redirect("/")} key={'dashboard'} >
                             <ListItemIcon ><DashboardIcon className={classes.backgrounColorText} /></ListItemIcon>
-                            <ListItemText className={classes.backgrounColorText} primary={<Translate value='tabs.dashboard' />} />
+                            <ListItemText className={classes.backgrounColorText} primary={<Translate value={'tabs.dashboard'} />} />
                         </ListItem>
                         <Divider />
-                        <ListItem className={classes.sidebarButton} button onClick={() => this.redirect("/patients")} key={'2'} >
+                        <ListItem className={this.isTabActive('/patients') ? classes.activeSidebarButton : classes.sidebarButton} button onClick={() => this.redirect("/patients")} key={'patients'} >
                             <ListItemIcon ><AssignmentIndIcon className={classes.backgrounColorText} /></ListItemIcon>
                             <ListItemText className={classes.backgrounColorText} primary={<Translate value='tabs.patients' />} />
                         </ListItem>
-                        <ListItem className={classes.sidebarButton} button onClick={() => this.redirect("/apointments")} key={'3'} >
+                        <ListItem className={this.isTabActive('/apointments') ? classes.activeSidebarButton : classes.sidebarButton} button onClick={() => this.redirect("/apointments")} key={'apointments'} >
                             <ListItemIcon ><TodayIcon className={classes.backgrounColorText} /></ListItemIcon>
-                            <ListItemText className={classes.whiteText} primary={<Translate value='tabs.apointments' />} />
+                            <ListItemText className={classes.whiteText} primary={<Translate value={'tabs.apointments'} />} />
                         </ListItem>
-                        <ListItem className={classes.sidebarButton} button onClick={() => this.redirect("/pathologies")} key={'4'} >
+                        <ListItem className={this.isTabActive('/pathologies') ? classes.activeSidebarButton : classes.sidebarButton} button onClick={() => this.redirect("/pathologies")} key={'pathologies'} >
                             <ListItemIcon ><LocalHospitalIcon className={classes.backgrounColorText} /></ListItemIcon>
-                            <ListItemText className={classes.whiteText} primary={<Translate value='tabs.pathologies' />} />
+                            <ListItemText className={classes.whiteText} primary={<Translate value={'tabs.pathologies'} />} />
                         </ListItem>
                     </List>
                     <Divider />
@@ -149,7 +152,7 @@ class MiniDrawer extends React.Component {
                     <div className={classes.toolbar} />
                     {this.props.children}
                 </main>
-            </div>
+            </div >
         );
     }
 }
