@@ -69,6 +69,7 @@ class LanguagePicker extends React.Component {
                     getContentAnchorEl={null}
                     anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                     transformOrigin={{ vertical: "top", horizontal: "center" }}
+                    style={{ marginTop: '10px' }}
                 >
                     {this.state.languages.map(item => (
                         <MenuItem
