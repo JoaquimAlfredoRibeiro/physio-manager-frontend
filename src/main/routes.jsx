@@ -6,6 +6,7 @@ import Dashboard from '../components/dashboard/Dashboard.component'
 import Patients from '../components/patients/Patients.component'
 import Apointments from '../components/apointments/Apointments.components'
 import Pathologies from '../components/pathologies/Pathologies.component'
+import Messages from '../components/common/Messages'
 
 export default props => (
   <BrowserRouter>
@@ -19,6 +20,7 @@ export default props => (
           <Redirect from="*" to="/" />
         </Switch>
       </Navigation>
+      <Messages />
     </div>
   </BrowserRouter>
 )
