@@ -18,7 +18,11 @@
     "welcome": "Bem-vindo"
   },
   "patients": {
-    "welcome": "Povo Quebrado"
+    "id": "ID",
+    "fullName": "Nome",
+    "phoneNumber": "Nº Telefone",
+    "email": "E-mail",
+    "address": "Morada"
   },
   "apointments": {
     "welcome": "Marcar Situações"

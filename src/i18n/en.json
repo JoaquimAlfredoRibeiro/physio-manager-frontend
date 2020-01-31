@@ -18,7 +18,11 @@
     "welcome": "Welcome"
   },
   "patients": {
-    "welcome": "Broken People"
+    "id": "ID",
+    "fullName": "Full Name",
+    "phoneNumber": "Phone Number",
+    "email": "E-mail",
+    "address": "Adress"
   },
   "apointments": {
     "welcome": "Schedule People"
