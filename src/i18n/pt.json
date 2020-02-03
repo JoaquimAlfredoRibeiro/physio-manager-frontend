@@ -10,6 +10,24 @@
   "app": {
     "name": "Physio Manager"
   },
+  "login": {
+    "email": "Endereço de e-mail",
+    "password": "Password",
+    "signin": "Entrar",
+    "forgotPassword": "Esqueceu-se da password?",
+    "noAccountPrompt": "Não tem conta? Registe-se.",
+    "rememberMe": "Lembrar-me",
+    "register": "Registar",
+    "firstName": "Primeiro Nome",
+    "lastName": "Ultimo Nome",
+    "accountPrompt": "Já tem conta? Entrar."
+  },
+  "tabs": {
+    "dashboard": "Dashboard",
+    "patients": "Pacientes",
+    "apointments": "Marcações",
+    "pathologies": "Patologias"
+  },
   "topNav": {
     "myAccount": "A minha conta",
     "logout": "Sair"
@@ -29,11 +47,5 @@
   },
   "pathologies": {
     "welcome": "Maleitas e afins"
-  },
-  "tabs": {
-    "dashboard": "Dashboard",
-    "patients": "Pacientes",
-    "apointments": "Marcações",
-    "pathologies": "Patologias"
   }
 }
