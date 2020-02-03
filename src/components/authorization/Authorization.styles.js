@@ -1,8 +1,11 @@
 import loginImage from '../../assets/images/Login1.jpg'
 
 export default theme => ({
+    container: {
+        marginTop: '-20px'
+    },
     paper: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(2),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -30,7 +33,7 @@ export default theme => ({
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        flex: 1,
+        flex: 2,
     },
     rightHalf: {
         flex: 1,

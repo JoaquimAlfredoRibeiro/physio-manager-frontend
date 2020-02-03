@@ -44,7 +44,7 @@ class Login extends React.Component {
 
         return (
             <div>
-                <Container component="main" maxWidth="xs">
+                <Container component="main" maxWidth="xs" >
                     <div className={classes.paper}>
                         <Avatar className={classes.avatar}>
                             <LockOutlinedIcon />
@@ -80,6 +80,7 @@ class Login extends React.Component {
                                 control={<Checkbox value="remember" color="primary" />}
                                 label={<Translate value='login.rememberMe' />}
                             />
+                            <Typography variant='subtitle1' align='center' style={{ marginTop: '5px' }}><Translate value='login.tryApp' /></Typography>
                             <Button
                                 type="submit"
                                 fullWidth
@@ -107,7 +108,7 @@ class Login extends React.Component {
                         <Copyright />
                     </Box>
                 </Container >
-            </div>
+            </div >
         );
     }
 }

@@ -20,7 +20,8 @@
     "register": "Registar",
     "firstName": "Primeiro Nome",
     "lastName": "Ultimo Nome",
-    "accountPrompt": "Já tem conta? Entrar."
+    "accountPrompt": "Já tem conta? Entrar.",
+    "tryApp": "Quer experimentar o app? Entre com e-mail: user@gmail.com e password: user"
   },
   "tabs": {
     "dashboard": "Dashboard",

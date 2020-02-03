@@ -7,7 +7,7 @@ export default function Copyright() {
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
             <Link color="inherit" href="https://github.com/JoaquimAlfredoRibeiro">
-                Your Website
+                Physio Manager
       </Link>{' '}
             {new Date().getFullYear()}
             {'.'}

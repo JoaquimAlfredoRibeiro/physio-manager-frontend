@@ -8,7 +8,9 @@ import { withStyles } from '@material-ui/core/styles';
 import AuthorizationStyles from './Authorization.styles'
 import RegisterComponent from './Register.component';
 import LoginComponent from './Login.component';
-import { Paper } from '@material-ui/core';
+import { Paper, Typography } from '@material-ui/core';
+
+import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 
 const styles = AuthorizationStyles;
 
@@ -30,6 +32,9 @@ class Authorization extends React.Component {
             <section className={classes.container}>
                 <Paper className={classes.leftHalf} />
                 <div className={classes.rightHalf}>
+                    <Typography variant='h4' align='center' style={{ paddingTop: '30px' }}>
+                        Physio Manager
+                    </Typography>
                     <If test={isLoginActive}>
                         <LoginComponent />
                     </If>
