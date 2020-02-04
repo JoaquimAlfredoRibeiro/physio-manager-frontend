@@ -99,6 +99,18 @@ class Register extends React.Component {
                                     autoComplete="current-password"
                                 />
                             </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="repeatPassword"
+                                    label={<Translate value='login.repeatPassword' />}
+                                    type="password"
+                                    id="password"
+                                    autoComplete="current-password"
+                                />
+                            </Grid>
                         </Grid>
                         <Button
                             type="submit"

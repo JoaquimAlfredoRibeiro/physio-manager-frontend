@@ -8,9 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AuthorizationStyles from './Authorization.styles'
 import RegisterComponent from './Register.component';
 import LoginComponent from './Login.component';
-import { Paper, Typography } from '@material-ui/core';
-
-import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
+import { Paper, Typography, Grid } from '@material-ui/core';
 
 const styles = AuthorizationStyles;
 
@@ -29,20 +27,23 @@ class Authorization extends React.Component {
         const { isLoginActive } = this.props
 
         return (
-            <section className={classes.container}>
-                <Paper className={classes.leftHalf} />
-                <div className={classes.rightHalf}>
-                    <Typography variant='h4' align='center' style={{ paddingTop: '30px' }}>
-                        Physio Manager
-                    </Typography>
-                    <If test={isLoginActive}>
-                        <LoginComponent />
-                    </If>
-                    <If test={!isLoginActive}>
-                        <RegisterComponent />
-                    </If>
-                </div>
-            </section>
+            <Grid container component="main" className={classes.root}>
+                <Grid item xs={false} sm={4} md={8} className={classes.image} />
+                <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square>
+                    <div className={classes.paper}>
+
+                        <Typography variant='h4' align='center'>
+                            Physio Manager
+                        </Typography>
+                        <If test={isLoginActive}>
+                            <LoginComponent />
+                        </If>
+                        <If test={!isLoginActive}>
+                            <RegisterComponent />
+                        </If>
+                    </div>
+                </Grid>
+            </Grid>
         );
     }
 }

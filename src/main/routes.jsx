@@ -18,10 +18,11 @@ export default props => (
           <Route path="/patients" component={Patients} />
           <Route path="/apointments" component={Apointments} />
           <Route path="/pathologies" component={Pathologies} />
-          <Route path="/signin" component={Authorization} />
+          <Route path="/auth" component={Authorization} />
           <Redirect from="*" to="/" />
         </Switch>
       </Navigation>
+      {/* <Authorization /> */}
       <Messages />
     </div>
   </BrowserRouter>

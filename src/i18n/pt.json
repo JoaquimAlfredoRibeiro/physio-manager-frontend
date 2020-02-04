@@ -13,6 +13,7 @@
   "login": {
     "email": "Endereço de e-mail",
     "password": "Password",
+    "repeatPassword": "Repita Password",
     "signin": "Entrar",
     "forgotPassword": "Esqueceu-se da password?",
     "noAccountPrompt": "Não tem conta? Registe-se.",
@@ -21,7 +22,7 @@
     "firstName": "Primeiro Nome",
     "lastName": "Ultimo Nome",
     "accountPrompt": "Já tem conta? Entrar.",
-    "tryApp": "Quer experimentar o app? Entre com e-mail: user@gmail.com e password: user"
+    "tryApp": "Quer experimentar o app? Entre com e-mail: user@gmail.com e password: user1234"
   },
   "tabs": {
     "dashboard": "Dashboard",
