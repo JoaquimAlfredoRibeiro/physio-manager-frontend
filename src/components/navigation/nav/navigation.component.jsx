@@ -116,7 +116,7 @@ class MiniDrawer extends React.Component {
                 >
 
                     <div className={classes.toolbar}>
-                        <div className={classes.logoDiv}>
+                        <div className={classes.logoDiv} onClick={() => this.redirect("/")} >
                             <DirectionsRunIcon color='primary' fontSize='large' />
                             <h3 className={classes.backgrounColorText}>Physio Manager</h3>
                         </div>
