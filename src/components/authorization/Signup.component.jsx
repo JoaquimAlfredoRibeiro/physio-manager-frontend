@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux'
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
@@ -24,18 +23,44 @@ import { changeIsLoginActive } from './AuthorizationActions'
 
 const styles = AuthorizationStyles;
 
-class Register extends React.Component {
+class Signup extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            isLoginActive: this.props.isLoginActive
+            isLoginActive: this.props.isLoginActive,
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            repeatPassword: '',
+            errors: {}
         };
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     };
 
     changeIsLoginActive() {
         this.props.changeIsLoginActive(!this.state.isLoginActive)
+    }
+
+    handleInputChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        const user = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            password: this.state.password,
+            repeatPassword: this.state.repeatPassword
+        }
     }
 
     render() {
@@ -48,14 +73,13 @@ class Register extends React.Component {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        <Translate value='login.register' />
+                        <Translate value='login.signup' />
                     </Typography>
 
-                    <form className={classes.form} noValidate>
+                    <form className={classes.form} noValidate onSubmit={this.handleSubmit}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
-                                    autoComplete="fname"
                                     name="firstName"
                                     variant="outlined"
                                     required
@@ -63,6 +87,8 @@ class Register extends React.Component {
                                     id='firstName'
                                     label={<Translate value='login.firstName' />}
                                     autoFocus
+                                    onChange={this.handleInputChange}
+                                    value={this.state.firstName}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -74,6 +100,8 @@ class Register extends React.Component {
                                     label={<Translate value='login.lastName' />}
                                     name="lastName"
                                     autoComplete="lname"
+                                    onChange={this.handleInputChange}
+                                    value={this.state.lastName}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -85,6 +113,8 @@ class Register extends React.Component {
                                     label={<Translate value='login.email' />}
                                     name="email"
                                     autoComplete="email"
+                                    onChange={this.handleInputChange}
+                                    value={this.state.email}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -97,6 +127,8 @@ class Register extends React.Component {
                                     type="password"
                                     id="password"
                                     autoComplete="current-password"
+                                    onChange={this.handleInputChange}
+                                    value={this.state.password}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -109,6 +141,8 @@ class Register extends React.Component {
                                     type="password"
                                     id="password"
                                     autoComplete="current-password"
+                                    onChange={this.handleInputChange}
+                                    value={this.state.repeatPassword}
                                 />
                             </Grid>
                         </Grid>
@@ -119,7 +153,7 @@ class Register extends React.Component {
                             color="primary"
                             className={classes.submit}
                         >
-                            <Translate value='login.register' />
+                            <Translate value='login.signup' />
                         </Button>
                         <Grid container justify="flex-end">
                             <Grid item>
@@ -144,4 +178,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({ changeIsLoginActive }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(Register))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(Signup))

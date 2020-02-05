@@ -21,7 +21,7 @@ export default theme => ({
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: '100%',
+        width: '150%',
         marginTop: theme.spacing(1),
     },
     submit: {

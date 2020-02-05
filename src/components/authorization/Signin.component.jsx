@@ -25,18 +25,38 @@ import { changeIsLoginActive } from './AuthorizationActions'
 
 const styles = AuthorizationStyles;
 
-class Login extends React.Component {
+class Signin extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            isLoginActive: this.props.isLoginActive
+            isLoginActive: this.props.isLoginActive,
+            email: '',
+            password: '',
+            errors: {}
         };
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     };
 
     changeLoginActive() {
         this.props.changeIsLoginActive(!this.props.isLoginActive)
+    }
+
+    handleInputChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        const user = {
+            email: this.state.email,
+            password: this.state.password,
+        }
     }
 
     render() {
@@ -53,7 +73,7 @@ class Login extends React.Component {
                             <Translate value='login.signin' />
                         </Typography>
 
-                        <form className={classes.form} noValidate>
+                        <form className={classes.form} noValidate onSubmit={this.handleSubmit}>
                             <TextField
                                 variant="outlined"
                                 margin="normal"
@@ -64,6 +84,8 @@ class Login extends React.Component {
                                 name="email"
                                 autoComplete="email"
                                 autoFocus
+                                onChange={this.handleInputChange}
+                                value={this.state.email}
                             />
                             <TextField
                                 variant="outlined"
@@ -75,6 +97,8 @@ class Login extends React.Component {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                onChange={this.handleInputChange}
+                                value={this.state.password}
                             />
                             <FormControlLabel
                                 control={<Checkbox value="remember" color="primary" />}
@@ -119,4 +143,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({ changeIsLoginActive }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(Login))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(Signin))

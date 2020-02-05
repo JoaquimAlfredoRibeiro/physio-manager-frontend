@@ -6,8 +6,8 @@ import If from '../common/If'
 
 import { withStyles } from '@material-ui/core/styles';
 import AuthorizationStyles from './Authorization.styles'
-import RegisterComponent from './Register.component';
-import LoginComponent from './Login.component';
+import Signup from './Signup.component';
+import Signin from './Signin.component';
 import { Paper, Typography, Grid } from '@material-ui/core';
 
 const styles = AuthorizationStyles;
@@ -36,10 +36,10 @@ class Authorization extends React.Component {
                             Physio Manager
                         </Typography>
                         <If test={isLoginActive}>
-                            <LoginComponent />
+                            <Signin />
                         </If>
                         <If test={!isLoginActive}>
-                            <RegisterComponent />
+                            <Signup />
                         </If>
                     </div>
                 </Grid>
