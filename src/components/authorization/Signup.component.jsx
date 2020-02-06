@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import PropTypes from 'prop-types';
+import _ from 'lodash'
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -17,10 +19,11 @@ import { Translate } from 'react-redux-i18n'
 import { withStyles } from '@material-ui/core/styles';
 import AuthorizationStyles from './Authorization.styles'
 
-import Copyright from './Copyright.component'
+import Copyright from '../common/Copyright.component'
 
-import { changeIsLoginActive } from './AuthorizationActions'
+import { changeIsLoginActive, registerUser } from './AuthorizationActions'
 
+var I18n = require('react-redux-i18n').I18n;
 const styles = AuthorizationStyles;
 
 class Signup extends React.Component {
@@ -61,10 +64,22 @@ class Signup extends React.Component {
             password: this.state.password,
             repeatPassword: this.state.repeatPassword
         }
+        this.props.registerUser(user)
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        if (props.errors) {
+            return {
+                errors: props.errors
+            }
+        }
+
+        return null;
     }
 
     render() {
         const { classes } = this.props;
+        const { errors } = this.state;
 
         return (
             <Container component="main" maxWidth="xs" >
@@ -89,6 +104,8 @@ class Signup extends React.Component {
                                     autoFocus
                                     onChange={this.handleInputChange}
                                     value={this.state.firstName}
+                                    error={Boolean(`${_.get(errors, ['fields', 'firstName'], '')}`)}
+                                    helperText={I18n.t(`loginValidation.${_.get(errors, ['fields', 'firstName'], '')}`)}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -102,6 +119,8 @@ class Signup extends React.Component {
                                     autoComplete="lname"
                                     onChange={this.handleInputChange}
                                     value={this.state.lastName}
+                                    error={Boolean(`${_.get(errors, ['fields', 'lastName'], '')}`)}
+                                    helperText={I18n.t(`loginValidation.${_.get(errors, ['fields', 'lastName'], '')}`)}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -115,6 +134,8 @@ class Signup extends React.Component {
                                     autoComplete="email"
                                     onChange={this.handleInputChange}
                                     value={this.state.email}
+                                    error={Boolean(`${_.get(errors, ['fields', 'email'], '')}`)}
+                                    helperText={I18n.t(`loginValidation.${_.get(errors, ['fields', 'email'], '')}`)}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -129,6 +150,8 @@ class Signup extends React.Component {
                                     autoComplete="current-password"
                                     onChange={this.handleInputChange}
                                     value={this.state.password}
+                                    error={Boolean(`${_.get(errors, ['fields', 'password'], '')}`)}
+                                    helperText={I18n.t(`loginValidation.${_.get(errors, ['fields', 'password'], '')}`)}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -139,10 +162,12 @@ class Signup extends React.Component {
                                     name="repeatPassword"
                                     label={<Translate value='login.repeatPassword' />}
                                     type="password"
-                                    id="password"
+                                    id="repeatPassword"
                                     autoComplete="current-password"
                                     onChange={this.handleInputChange}
                                     value={this.state.repeatPassword}
+                                    error={Boolean(`${_.get(errors, ['fields', 'repeatPassword'], '')}`)}
+                                    helperText={I18n.t(`loginValidation.${_.get(errors, ['fields', 'repeatPassword'], '')}`)}
                                 />
                             </Grid>
                         </Grid>
@@ -172,10 +197,15 @@ class Signup extends React.Component {
     }
 }
 
+Signup.propTypes = {
+    registerUser: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = state => ({
-    isLoginActive: state.authorization.isLoginActive
+    isLoginActive: state.authorization.isLoginActive,
+    errors: state.errors
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ changeIsLoginActive }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ changeIsLoginActive, registerUser }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(Signup))

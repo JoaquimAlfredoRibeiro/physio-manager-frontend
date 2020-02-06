@@ -27,4 +27,12 @@ export default theme => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    lanPicker: {
+        alignSelf: 'flex-end',
+        marginTop: theme.spacing(-5),
+        marginRight: theme.spacing(-2)
+    },
+    mainForm: {
+        marginTop: theme.spacing(5),
+    },
 });

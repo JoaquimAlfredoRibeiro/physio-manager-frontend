@@ -1,9 +1,18 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { withRouter } from 'react-router-dom'
+
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import IconButton from '@material-ui/core/IconButton'
 import AccountBoxIcon from '@material-ui/icons/AccountBox'
 import { Translate } from 'react-redux-i18n'
+
+import { logoutUser } from '../../authorization/AuthorizationActions'
+
+const MY_ACCOUNT = '1';
+const LOGOUT = '2';
 
 class AccountButton extends React.Component {
   constructor(props) {
@@ -21,17 +30,19 @@ class AccountButton extends React.Component {
     this.setState({ anchorEl: event.currentTarget });
   };
 
-  handleClose = event => {
+  handleClose = (item, event) => {
     this.setState({ anchorEl: null });
 
-    var txt =
-      '{"_name":"output","_type":"studio1.cat.act.services.athena.tech.cnf.conf.GetLangListImpl$Output","_UID":-1,"_INDEX":-1,"list":{"_name":"list","_type":"mrc.structure.resource.engine.ordb.XeCRDBCollection","name":"Langs","numTotalRecords":3,"pageSize":1000,"pageNum":0,"records":[{"_name":"recordsItem","_type":"mrc.structure.resource.engine.ordb.XeCRDBRecord","tableName":"Lang","columns":[{"_name":"columnsItem","_type":"mrc.structure.resource.engine.ordb.XeCRDBColumn","columnName":"id","dataType":"2","value":"1"},{"_name":"columnsItem","_type":"mrc.structure.resource.engine.ordb.XeCRDBColumn","columnName":"name","dataType":"8","value":"English US"},{"_name":"columnsItem","_type":"mrc.structure.resource.engine.ordb.XeCRDBColumn","columnName":"locale","dataType":"8","value":"en_US"}],"records":[]},{"_name":"recordsItem","_type":"mrc.structure.resource.engine.ordb.XeCRDBRecord","tableName":"Lang","columns":[{"_name":"columnsItem","_type":"mrc.structure.resource.engine.ordb.XeCRDBColumn","columnName":"id","dataType":"2","value":"2"},{"_name":"columnsItem","_type":"mrc.structure.resource.engine.ordb.XeCRDBColumn","columnName":"name","dataType":"8","value":"Español"},{"_name":"columnsItem","_type":"mrc.structure.resource.engine.ordb.XeCRDBColumn","columnName":"locale","dataType":"8","value":"es_ES"}],"records":[]},{"_name":"recordsItem","_type":"mrc.structure.resource.engine.ordb.XeCRDBRecord","tableName":"Lang","columns":[{"_name":"columnsItem","_type":"mrc.structure.resource.engine.ordb.XeCRDBColumn","columnName":"id","dataType":"2","value":"3"},{"_name":"columnsItem","_type":"mrc.structure.resource.engine.ordb.XeCRDBColumn","columnName":"name","dataType":"8","value":"Português"},{"_name":"columnsItem","_type":"mrc.structure.resource.engine.ordb.XeCRDBColumn","columnName":"locale","dataType":"8","value":"pt_PT"}],"records":[]}]}}'
-
-    var obj = JSON.parse(txt)
-
-    console.log(obj)
-
-    //TODO implement events
+    switch (item.id) {
+      case MY_ACCOUNT:
+        console.log('My Account')
+        break;
+      case LOGOUT:
+        this.props.logoutUser(this.props.history);
+        break;
+      default:
+        break;
+    }
   };
 
   render() {
@@ -68,4 +79,6 @@ class AccountButton extends React.Component {
   }
 }
 
-export default AccountButton
+const mapDispatchToProps = dispatch => bindActionCreators({ logoutUser }, dispatch)
+
+export default withRouter(connect(null, mapDispatchToProps)(AccountButton))

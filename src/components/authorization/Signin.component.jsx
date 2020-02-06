@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types';
+import _ from 'lodash'
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -19,10 +22,11 @@ import { Translate } from 'react-redux-i18n'
 import { withStyles } from '@material-ui/core/styles';
 import AuthorizationStyles from './Authorization.styles'
 
-import Copyright from './Copyright.component'
+import Copyright from '../common/Copyright.component'
 
-import { changeIsLoginActive } from './AuthorizationActions'
+import { changeIsLoginActive, loginUser } from './AuthorizationActions'
 
+var I18n = require('react-redux-i18n').I18n;
 const styles = AuthorizationStyles;
 
 class Signin extends React.Component {
@@ -32,8 +36,8 @@ class Signin extends React.Component {
 
         this.state = {
             isLoginActive: this.props.isLoginActive,
-            email: '',
-            password: '',
+            email: 'user@gmail.com',
+            password: 'user1234',
             errors: {}
         };
 
@@ -57,10 +61,22 @@ class Signin extends React.Component {
             email: this.state.email,
             password: this.state.password,
         }
+        this.props.loginUser(user, this.props.history)
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        if (props.errors) {
+            return {
+                errors: props.errors
+            }
+        }
+
+        return null;
     }
 
     render() {
         const { classes } = this.props;
+        const { errors } = this.state;
 
         return (
             <div>
@@ -86,6 +102,8 @@ class Signin extends React.Component {
                                 autoFocus
                                 onChange={this.handleInputChange}
                                 value={this.state.email}
+                                error={Boolean(`${_.get(errors, ['fields', 'email'], '')}`)}
+                                helperText={I18n.t(`loginValidation.${_.get(errors, ['fields', 'email'], '')}`)}
                             />
                             <TextField
                                 variant="outlined"
@@ -99,6 +117,8 @@ class Signin extends React.Component {
                                 autoComplete="current-password"
                                 onChange={this.handleInputChange}
                                 value={this.state.password}
+                                error={Boolean(`${_.get(errors, ['fields', 'password'], '')}`)}
+                                helperText={I18n.t(`loginValidation.${_.get(errors, ['fields', 'password'], '')}`)}
                             />
                             <FormControlLabel
                                 control={<Checkbox value="remember" color="primary" />}
@@ -137,10 +157,15 @@ class Signin extends React.Component {
     }
 }
 
+Signin.propTypes = {
+    loginUser: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = state => ({
-    isLoginActive: state.authorization.isLoginActive
+    isLoginActive: state.authorization.isLoginActive,
+    errors: state.errors
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ changeIsLoginActive }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ changeIsLoginActive, loginUser }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(Signin))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(Signin)))

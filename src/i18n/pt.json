@@ -21,8 +21,16 @@
     "signup": "Registar",
     "firstName": "Primeiro Nome",
     "lastName": "Ultimo Nome",
-    "accountPrompt": "Já tem conta? Entrar.",
-    "tryApp": "Quer experimentar o app? Entre com e-mail: user@gmail.com e password: user1234"
+    "accountPrompt": "Já tem conta? Login.",
+    "tryApp": "Quer experimentar o app? Entre com e-mail: user@gmail.com e password: user1234",
+    "signupSuccess": "Registo efetuado com sucesso",
+    "signinSuccess": "Login efetuado com sucesso"
+  },
+  "loginValidation": {
+    "must not be blank": "obrigatório",
+    "size must be between 3 and 20": "tem de ter entre 6 e 20 caracteres",
+    "must be a well-formed email address": "endereço de email inválido",
+    "Bad credentials": "Credenciais inválidas"
   },
   "tabs": {
     "dashboard": "Dashboard",
@@ -49,5 +57,10 @@
   },
   "pathologies": {
     "welcome": "Maleitas e afins"
+  },
+  "toastr": {
+    "success": "Sucesso",
+    "error": "Erro",
+    "Full authentication is required to access this resource": "Autenticação necessária para aceder a este recurso"
   }
 }

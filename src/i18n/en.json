@@ -22,7 +22,15 @@
     "firstName": "First Name",
     "lastName": "Last Name",
     "accountPrompt": "Already have an account? Sign in.",
-    "tryApp": "Want to try the app? Login with e-mail: user@gmail.com and password: user1234"
+    "tryApp": "Want to try the app? Login with e-mail: user@gmail.com and password: user1234",
+    "signupSuccess": "Sign up successful",
+    "signinSuccess": "Sign in successful"
+  },
+  "loginValidation": {
+    "must not be blank": "mandatory",
+    "size must be between 3 and 20": "size must be between 6 and 20",
+    "must be a well-formed email address": "must be a well-formed email address",
+    "Bad credentials": "Invalid credentials"
   },
   "tabs": {
     "dashboard": "Dashboard",
@@ -49,5 +57,10 @@
   },
   "pathologies": {
     "welcome": "Pathologies all Arround"
+  },
+  "toastr": {
+    "success": "Success",
+    "error": "Error",
+    "Full authentication is required to access this resource": "Full authentication is required to access this resource"
   }
 }
