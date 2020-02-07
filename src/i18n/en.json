@@ -11,7 +11,7 @@
     "name": "Physio Manager"
   },
   "login": {
-    "email": "E-mail Adress",
+    "email": "E-mail Address",
     "password": "Password",
     "repeatPassword": "Repeat Password",
     "signin": "Sign In",
@@ -50,7 +50,7 @@
     "fullName": "Full Name",
     "phoneNumber": "Phone Number",
     "email": "E-mail",
-    "address": "Adress"
+    "address": "Address"
   },
   "apointments": {
     "welcome": "Schedule People"

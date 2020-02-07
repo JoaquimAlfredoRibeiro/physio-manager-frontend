@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -16,7 +16,7 @@ import AuthRequired from '../common/AuthRequired'
 
 import { getAllPatients, clearData } from './PatientActions'
 
-class Patients extends Component {
+class Patients extends React.Component {
 
     constructor(props) {
         super(props)
