@@ -22,8 +22,7 @@ export default props => (
           <Redirect from="*" to="/" />
         </Switch>
       </Navigation>
-      {/* <Authorization /> */}
       <Messages />
     </div>
-  </BrowserRouter>
+  </BrowserRouter >
 )

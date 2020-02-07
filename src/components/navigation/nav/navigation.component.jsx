@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 
@@ -82,78 +83,88 @@ class MiniDrawer extends React.Component {
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
 
-        return (
-            <div className={classes.root}>
-                <CssBaseline />
-                <AppBar position="absolute" className={classNames(classes.appBar, this.state.open && classes.appBarShift)} >
-                    <Toolbar disableGutters={!this.state.open}
-                        style={{ marginRight: '10px' }}>
-                        <IconButton color="inherit" aria-label="Open drawer" onClick={this.handleDrawerOpen} className={classNames(classes.menuButton, this.state.open && classes.hide)} >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography color="inherit" className={classes.AppBarTypography}>
-                            {this.currentTab(this.props.history.location.pathname)}
-                        </Typography>
+        console.log(this.props.isAuthenticated)
 
-                        <LanguagePicker />
+        if (this.props.isAuthenticated) {
+            return (
+                <div className={classes.root}>
+                    <CssBaseline />
+                    <AppBar position="absolute" className={classNames(classes.appBar, this.state.open && classes.appBarShift)} >
+                        <Toolbar disableGutters={!this.state.open}
+                            style={{ marginRight: '10px' }}>
+                            <IconButton color="inherit" aria-label="Open drawer" onClick={this.handleDrawerOpen} className={classNames(classes.menuButton, this.state.open && classes.hide)} >
+                                <MenuIcon />
+                            </IconButton>
+                            <Typography color="inherit" className={classes.AppBarTypography}>
+                                {this.currentTab(this.props.history.location.pathname)}
+                            </Typography>
 
-                        <IconButton>
-                            <Badge badgeContent={1} color="primary">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
+                            <LanguagePicker />
 
-                        <AccountButton />
+                            <IconButton>
+                                <Badge badgeContent={1} color="primary">
+                                    <NotificationsIcon />
+                                </Badge>
+                            </IconButton>
 
-                    </Toolbar>
-                </AppBar>
-                <Drawer
-                    variant="permanent"
-                    classes={{
-                        paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
-                    }}
-                    open={this.state.open}
-                >
+                            <AccountButton />
 
-                    <div className={classes.toolbar}>
-                        <div className={classes.logoDiv} onClick={() => this.redirect("/")} >
-                            <DirectionsRunIcon color='primary' fontSize='large' />
-                            <h3 className={classes.backgrounColorText}>Physio Manager</h3>
+                        </Toolbar>
+                    </AppBar>
+                    <Drawer
+                        variant="permanent"
+                        classes={{
+                            paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+                        }}
+                        open={this.state.open}
+                    >
+
+                        <div className={classes.toolbar}>
+                            <div className={classes.logoDiv} onClick={() => this.redirect("/")} >
+                                <DirectionsRunIcon color='primary' fontSize='large' />
+                                <h3 className={classes.backgrounColorText}>Physio Manager</h3>
+                            </div>
+                            <IconButton onClick={this.handleDrawerClose} aria-owns={open ? 'menu-appbar' : null} >
+                                <ChevronLeftIcon className={classes.backgrounColorText} />
+                            </IconButton>
+
                         </div>
-                        <IconButton onClick={this.handleDrawerClose} aria-owns={open ? 'menu-appbar' : null} >
-                            <ChevronLeftIcon className={classes.backgrounColorText} />
-                        </IconButton>
 
-                    </div>
-
-                    <Divider />
-                    <List className={classes.sidebarList}>
-                        <ListItem className={this.isTabActive('/') ? classes.activeSidebarButton : classes.sidebarButton} button onClick={() => this.redirect("/")} key={'dashboard'} >
-                            <ListItemIcon ><DashboardIcon className={classes.backgrounColorText} /></ListItemIcon>
-                            <ListItemText className={classes.backgrounColorText} primary={<Translate value={'tabs.dashboard'} />} />
-                        </ListItem>
                         <Divider />
-                        <ListItem className={this.isTabActive('/patients') ? classes.activeSidebarButton : classes.sidebarButton} button onClick={() => this.redirect("/patients")} key={'patients'} >
-                            <ListItemIcon ><AssignmentIndIcon className={classes.backgrounColorText} /></ListItemIcon>
-                            <ListItemText className={classes.backgrounColorText} primary={<Translate value='tabs.patients' />} />
-                        </ListItem>
-                        <ListItem className={this.isTabActive('/apointments') ? classes.activeSidebarButton : classes.sidebarButton} button onClick={() => this.redirect("/apointments")} key={'apointments'} >
-                            <ListItemIcon ><TodayIcon className={classes.backgrounColorText} /></ListItemIcon>
-                            <ListItemText className={classes.whiteText} primary={<Translate value={'tabs.apointments'} />} />
-                        </ListItem>
-                        <ListItem className={this.isTabActive('/pathologies') ? classes.activeSidebarButton : classes.sidebarButton} button onClick={() => this.redirect("/pathologies")} key={'pathologies'} >
-                            <ListItemIcon ><LocalHospitalIcon className={classes.backgrounColorText} /></ListItemIcon>
-                            <ListItemText className={classes.whiteText} primary={<Translate value={'tabs.pathologies'} />} />
-                        </ListItem>
-                    </List>
-                    <Divider />
-                </Drawer>
-                <main className={classes.content}>
-                    <div className={classes.toolbar} />
+                        <List className={classes.sidebarList}>
+                            <ListItem className={this.isTabActive('/') ? classes.activeSidebarButton : classes.sidebarButton} button onClick={() => this.redirect("/")} key={'dashboard'} >
+                                <ListItemIcon ><DashboardIcon className={classes.backgrounColorText} /></ListItemIcon>
+                                <ListItemText className={classes.backgrounColorText} primary={<Translate value={'tabs.dashboard'} />} />
+                            </ListItem>
+                            <Divider />
+                            <ListItem className={this.isTabActive('/patients') ? classes.activeSidebarButton : classes.sidebarButton} button onClick={() => this.redirect("/patients")} key={'patients'} >
+                                <ListItemIcon ><AssignmentIndIcon className={classes.backgrounColorText} /></ListItemIcon>
+                                <ListItemText className={classes.backgrounColorText} primary={<Translate value='tabs.patients' />} />
+                            </ListItem>
+                            <ListItem className={this.isTabActive('/apointments') ? classes.activeSidebarButton : classes.sidebarButton} button onClick={() => this.redirect("/apointments")} key={'apointments'} >
+                                <ListItemIcon ><TodayIcon className={classes.backgrounColorText} /></ListItemIcon>
+                                <ListItemText className={classes.whiteText} primary={<Translate value={'tabs.apointments'} />} />
+                            </ListItem>
+                            <ListItem className={this.isTabActive('/pathologies') ? classes.activeSidebarButton : classes.sidebarButton} button onClick={() => this.redirect("/pathologies")} key={'pathologies'} >
+                                <ListItemIcon ><LocalHospitalIcon className={classes.backgrounColorText} /></ListItemIcon>
+                                <ListItemText className={classes.whiteText} primary={<Translate value={'tabs.pathologies'} />} />
+                            </ListItem>
+                        </List>
+                        <Divider />
+                    </Drawer>
+                    <main className={classes.content}>
+                        <div className={classes.toolbar} />
+                        {this.props.children}
+                    </main>
+                </div >
+            );
+        } else {
+            return (
+                <div>
                     {this.props.children}
-                </main>
-            </div >
-        );
+                </div>
+            )
+        }
     }
 }
 
@@ -162,4 +173,8 @@ MiniDrawer.propTypes = {
     theme: PropTypes.object.isRequired,
 };
 
-export default withRouter((withStyles(styles, { withTheme: true })(MiniDrawer)))
+const mapStateToProps = state => ({
+    isAuthenticated: state.authorization.isAuthenticated
+})
+
+export default withRouter(connect(mapStateToProps, null)(withStyles(styles, { withTheme: true })(MiniDrawer)))

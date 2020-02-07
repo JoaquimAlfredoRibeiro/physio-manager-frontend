@@ -12,13 +12,19 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-import { getAllPatients } from './PatientActions'
+import AuthRequired from '../common/AuthRequired'
+
+import { getAllPatients, clearData } from './PatientActions'
 
 class Patients extends Component {
 
     constructor(props) {
         super(props)
         this.props.getAllPatients()
+    }
+
+    componentWillUnmount() {
+        this.props.clearData();
     }
 
     render() {
@@ -66,6 +72,6 @@ const mapStateToProps = state => ({
     patientList: state.patients.patientList
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getAllPatients }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ getAllPatients, clearData }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Patients)
+export default AuthRequired(connect(mapStateToProps, mapDispatchToProps)(Patients))

@@ -8,6 +8,10 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 patientList: action.payload.data
             }
+        case PatientActionTypes.CLEAR_DATA:
+            return {
+                patientList: action.payload
+            }
         default:
             return state
     }

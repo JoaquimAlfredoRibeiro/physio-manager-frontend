@@ -52,9 +52,7 @@ export const loginUser = (user, history) => dispatch => {
     axios.post(`${BASE_URL}/signin`, user)
         .then(res => {
             const token = res.data.accessToken;
-            console.log('before calling localStorage: ' + token)
-            localStorage.setItem('jwtToken', token);
-            console.log('before calling setAuthToken: ' + token)
+            localStorage.setItem(appConsts.ACCESS_TOKEN, token);
             setAuthToken(token);
             const decoded = jwt_decode(token);
             dispatch(setCurrentUser(decoded));
@@ -82,6 +80,13 @@ export const loginUser = (user, history) => dispatch => {
         });
 }
 
+export const logoutUser = (history) => dispatch => {
+    localStorage.removeItem(appConsts.ACCESS_TOKEN);
+    setAuthToken(false);
+    dispatch(setCurrentUser({}));
+    history.push('/auth');
+}
+
 export const setCurrentUser = decoded => {
     return {
         type: AuthorizationActionTypes.SET_CURRENT_USER,
@@ -89,9 +94,24 @@ export const setCurrentUser = decoded => {
     }
 }
 
-export const logoutUser = (history) => dispatch => {
-    localStorage.removeItem('jwtToken');
-    setAuthToken(false);
-    dispatch(setCurrentUser({}));
-    history.push('/auth');
-}
+// export function getCurrentUser() {
+//     if (!localStorage.getItem(appConsts.ACCESS_TOKEN)) {
+//         return Promise.reject("No access token set.");
+//     }
+
+//     axios.get(`${BASE_URL}/me`)
+//         .then(res => {
+//             const token = res.data.accessToken;
+//             console.log('before calling localStorage: ' + token)
+//             localStorage.setItem(appConsts.ACCESS_TOKEN, token);
+//             console.log('before calling setAuthToken: ' + token)
+//             setAuthToken(token);
+//             const decoded = jwt_decode(token);
+//             dispatch(setCurrentUser(decoded));
+//         })
+
+//     return request({
+//         url: BASE_URL + "/me",
+//         method: 'GET'
+//     });
+// }
