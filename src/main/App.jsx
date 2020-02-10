@@ -18,7 +18,9 @@ class App extends React.Component {
       currentUser: null,
       isAuthenticated: false,
     }
-    this.loadCurrentUser = this.loadCurrentUser.bind(this);
+    // this.loadCurrentUser = this.loadCurrentUser.bind(this);
+
+    this.loadCurrentUser();
   }
 
   loadCurrentUser() {
@@ -32,9 +34,9 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.loadCurrentUser();
-  }
+  // componentDidMount() {
+  //   this.loadCurrentUser();
+  // }
 
   render() {
     return <Routes />;

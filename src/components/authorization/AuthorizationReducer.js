@@ -12,8 +12,6 @@ export default (state = INITIAL_STATE, action) => {
         case AuthorizationActionTypes.CHANGE_IS_LOGIN_ACTIVE:
             return { ...state, isLoginActive: action.payload }
         case AuthorizationActionTypes.SET_CURRENT_USER:
-            console.log(action.payload)
-            console.log(!isEmpty(action.payload))
             return {
                 ...state,
                 isAuthenticated: !isEmpty(action.payload),

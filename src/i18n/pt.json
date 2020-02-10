@@ -46,6 +46,7 @@
     "welcome": "Bem-vindo"
   },
   "patients": {
+    "patientList": "Lista de Pacientes",
     "id": "ID",
     "fullName": "Nome",
     "phoneNumber": "Nº Telefone",

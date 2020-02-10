@@ -5,10 +5,20 @@ import { connect } from "react-redux";
 export default function (ComposedComponent) {
     class AuthRequired extends React.Component {
 
+        constructor(props) {
+            super(props)
+
+            this.state = {
+                isAuthenticated: ''
+            };
+        }
+
         static getDerivedStateFromProps(props) {
             if (!props.isAuthenticated) {
                 props.history.push("/auth");
             }
+
+            return null
         }
 
         componentDidUpdate(nextProps) {

@@ -83,7 +83,7 @@ class MiniDrawer extends React.Component {
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
 
-        if (this.props.isAuthenticated) {
+        if (this.props.isAuthenticated && this.props.history.location.pathname !== '/auth') {
             return (
                 <div className={classes.root}>
                     <CssBaseline />

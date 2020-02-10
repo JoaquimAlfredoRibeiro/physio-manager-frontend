@@ -102,9 +102,7 @@ export const setCurrentUser = decoded => {
 //     axios.get(`${BASE_URL}/me`)
 //         .then(res => {
 //             const token = res.data.accessToken;
-//             console.log('before calling localStorage: ' + token)
 //             localStorage.setItem(appConsts.ACCESS_TOKEN, token);
-//             console.log('before calling setAuthToken: ' + token)
 //             setAuthToken(token);
 //             const decoded = jwt_decode(token);
 //             dispatch(setCurrentUser(decoded));
