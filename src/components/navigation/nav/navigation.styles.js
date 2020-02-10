@@ -96,20 +96,23 @@ export default theme => ({
         },
         '&:focus': {
             transitionDelay: '0.25s',
-            backgroundColor: appConstants.PRIMARY_INFO_MAIN,
+            backgroundColor: appConstants.PRIMARY_INFO_MAIN_ON_BLACK,
+            // backgroundColor: appConstants.PRIMARY_INFO_MAIN,
         },
 
     },
     activeSidebarButton: {
         marginTop: '10px',
         borderRadius: '5px',
-        backgroundColor: appConstants.PRIMARY_INFO_MAIN,
+        backgroundColor: appConstants.PRIMARY_INFO_MAIN_ON_BLACK,
+        // backgroundColor: appConstants.PRIMARY_INFO_MAIN,
         "&:hover,&:focus,&:visited,&": {
             color: '#FFF',
         },
         '&:focus': {
             transitionDelay: '0.25s',
-            backgroundColor: appConstants.PRIMARY_INFO_MAIN,
+            backgroundColor: appConstants.PRIMARY_INFO_MAIN_ON_BLACK,
+            // backgroundColor: appConstants.PRIMARY_INFO_MAIN,
         }
     },
     sidebarList: {

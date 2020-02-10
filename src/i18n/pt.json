@@ -51,7 +51,8 @@
     "fullName": "Nome",
     "phoneNumber": "Nº Telefone",
     "email": "E-mail",
-    "address": "Morada"
+    "address": "Morada",
+    "addPatient": "Criar Paciente"
   },
   "apointments": {
     "welcome": "Marcar Situações"

@@ -51,7 +51,8 @@
     "fullName": "Full Name",
     "phoneNumber": "Phone Number",
     "email": "E-mail",
-    "address": "Address"
+    "address": "Address",
+    "addPatient": "Add Patient"
   },
   "apointments": {
     "welcome": "Schedule People"

@@ -15,6 +15,20 @@ export default createMuiTheme({
         backgroundColor: appConstants.BACKGROUND_COLOR
       }
     },
+    MuiButton: {
+      containedPrimary: {
+        backgroundColor: appConstants.BUTTON_COLOR_LIGHT,
+        '&:hover': {
+          backgroundColor: appConstants.BUTTON_COLOR_MAIN
+        }
+      },
+    },
+    MuiTable: {
+      root: {
+        marginLeft: '30px',
+        width: '96%',
+      },
+    },
     MuiMenuItem: {
       root: {
         '&:hover': {

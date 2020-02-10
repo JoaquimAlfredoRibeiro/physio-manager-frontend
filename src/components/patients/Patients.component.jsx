@@ -3,21 +3,19 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { Translate } from 'react-redux-i18n'
+import { withStyles } from '@material-ui/core/styles';
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import PatientStyles from './Patients.styles'
 import MaterialTable from 'material-table';
-
 import AuthRequired from '../common/AuthRequired'
 
-import { getAllPatients, clearData } from './PatientActions'
-import { Button } from '@material-ui/core';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
+import { getAllPatients, clearData } from './PatientActions'
+import { Button, Paper } from '@material-ui/core';
+import TableTitle from '../common/TableTitle';
+
+const styles = PatientStyles;
 const I18n = require('react-redux-i18n').I18n;
 
 class Patients extends React.Component {
@@ -31,51 +29,21 @@ class Patients extends React.Component {
         this.props.clearData();
     }
 
-
     render() {
 
+        const { classes } = this.props;
         const { patientList } = this.props
-        var teste = I18n.t('patients.fullName');
 
         if (!patientList.patients || !patientList.patients.length) {
             return null
         }
 
         return (
-            <div>
-                {/* <h6>Table 1</h6>
-                <TableContainer component={Paper}>
-                    <Table aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell><Translate value={'patients.id'} /></TableCell>
-                                <TableCell><Translate value={'patients.phoneNumber'} /></TableCell>
-                                <TableCell><Translate value={'patients.fullName'} /></TableCell>
-                                <TableCell><Translate value={'patients.email'} /></TableCell>
-                                <TableCell><Translate value={'patients.address'} /></TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {patientList.patients.map(row => (
-                                <TableRow key={row.id}>
-                                    <TableCell component="th" scope="row">
-                                        {row.id}
-                                    </TableCell>
-                                    <TableCell>{row.fullName}</TableCell>
-                                    <TableCell>{row.phoneNumber}</TableCell>
-                                    <TableCell>{row.email}</TableCell>
-                                    <TableCell>{row.address}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer> */}
-
-                <h6>Table 2</h6>
+            <div className={classes.root}>
+                <TableTitle text='patients.patientList' />
                 <MaterialTable
-                    title={I18n.t('patients.patientList')}
+                    title=''
                     columns={[
-                        // { title: `${I18n.t('patients.id')}`, field: 'id' },
                         { title: `${I18n.t('patients.fullName')}`, field: 'fullName' },
                         { title: `${I18n.t('patients.phoneNumber')}`, field: 'phoneNumber' },
                         { title: `${I18n.t('patients.email')}`, field: 'email' },
@@ -83,19 +51,26 @@ class Patients extends React.Component {
                     ]}
                     data={
                         patientList.patients.map(row => (
-                            { /*id: `${row.id}`,*/ fullName: `${row.fullName}`, phoneNumber: `${row.phoneNumber}`, email: `${row.email}`, address: `${row.address}`, }
+                            { fullName: `${row.fullName}`, phoneNumber: `${row.phoneNumber}`, email: `${row.email}`, address: `${row.address}`, }
                         ))
                     }
                     actions={[
                         {
-                            icon: 'save',
+                            icon: 'edit',
                             tooltip: 'Save User',
-                            onClick: (event, rowData) => alert("You saved " + rowData.name)
+                            onClick: (event, rowData) => alert("Gogogogo alpha team " + rowData.name)
                         }
                     ]}
                 >
-                    <Button>ASD</Button>
                 </MaterialTable>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    startIcon={<PersonAddIcon />}
+                >
+                    <Translate value='patients.addPatient' />
+                </Button>
             </div>
         )
     }
@@ -108,4 +83,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({ getAllPatients, clearData }, dispatch)
 
-export default AuthRequired(connect(mapStateToProps, mapDispatchToProps)(Patients))
+export default AuthRequired(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(Patients)))
