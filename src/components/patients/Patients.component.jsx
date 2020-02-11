@@ -57,10 +57,26 @@ class Patients extends React.Component {
                     actions={[
                         {
                             icon: 'edit',
-                            tooltip: 'Save User',
+                            tooltip: `${I18n.t('patients.editPatient')}`,
                             onClick: (event, rowData) => alert("Gogogogo alpha team " + rowData.name)
                         }
                     ]}
+                    localization={{
+                        pagination: {
+                            labelDisplayedRows: `${I18n.t('table.displayedRows')}`,
+                            labelRowsSelect: `${I18n.t('table.rows')}`,
+                            firstTooltip: `${I18n.t('table.firstPage')}`,
+                            previousTooltip: `${I18n.t('table.previousPage')}`,
+                            lastTooltip: `${I18n.t('table.lastPage')}`,
+                            nextTooltip: `${I18n.t('table.nextPage')}`,
+                        },
+                        header: {
+                            actions: `${I18n.t('table.actions')}`
+                        },
+                        toolbar: {
+                            searchPlaceholder: `${I18n.t('table.search')}`
+                        }
+                    }}
                 >
                 </MaterialTable>
                 <Button

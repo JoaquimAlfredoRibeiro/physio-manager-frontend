@@ -32,6 +32,16 @@
     "must be a well-formed email address": "endereço de email inválido",
     "Bad credentials": "Credenciais inválidas"
   },
+  "table": {
+    "displayedRows": "{from}-{to} de {count}",
+    "actions": "Ações",
+    "rows": "linhas",
+    "search": "Procurar",
+    "firstPage": "Primeira Página",
+    "lastPage": "Última Página",
+    "previousPage": "Página Anterior",
+    "nextPage": "Próxima Página"
+  },
   "tabs": {
     "dashboard": "Dashboard",
     "patients": "Pacientes",
@@ -52,7 +62,8 @@
     "phoneNumber": "Nº Telefone",
     "email": "E-mail",
     "address": "Morada",
-    "addPatient": "Criar Paciente"
+    "addPatient": "Criar Paciente",
+    "editPatient": "Editar Patiente"
   },
   "apointments": {
     "welcome": "Marcar Situações"

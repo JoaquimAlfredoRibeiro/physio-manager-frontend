@@ -32,6 +32,16 @@
     "must be a well-formed email address": "must be a well-formed email address",
     "Bad credentials": "Invalid credentials"
   },
+  "table": {
+    "displayedRows": "{from}-{to} of {count}",
+    "actions": "Actions",
+    "rows": "rows",
+    "search": "Search",
+    "firstPage": "First Page",
+    "lastPage": "Last Page",
+    "previousPage": "Previous Page",
+    "nextPage": "Next Page"
+  },
   "tabs": {
     "dashboard": "Dashboard",
     "patients": "Patients",
@@ -52,7 +62,8 @@
     "phoneNumber": "Phone Number",
     "email": "E-mail",
     "address": "Address",
-    "addPatient": "Add Patient"
+    "addPatient": "Add Patient",
+    "editPatient": "Edit Patient"
   },
   "apointments": {
     "welcome": "Schedule People"
