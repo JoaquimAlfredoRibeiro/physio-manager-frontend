@@ -129,7 +129,7 @@ class Signup extends React.Component {
                                     required
                                     fullWidth
                                     id="email"
-                                    label={<Translate value='login.email' />}
+                                    label={<Translate value='global.email' />}
                                     name="email"
                                     autoComplete="email"
                                     onChange={this.handleInputChange}

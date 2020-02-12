@@ -31,6 +31,8 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
 import navigationStyles from './navigation.styles'
+import Copyright from '../../common/Copyright.component';
+import FooterComponent from '../footer/Footer.component';
 
 const styles = navigationStyles;
 
@@ -69,6 +71,8 @@ class MiniDrawer extends React.Component {
                 return <Translate value='tabs.apointments' />
             case '/pathologies':
                 return <Translate value='tabs.pathologies' />
+            case '/patientProfile':
+                return <Translate value='tabs.patientProfile' />
             default:
                 return ''
         }
@@ -153,6 +157,7 @@ class MiniDrawer extends React.Component {
                     <main className={classes.content}>
                         <div className={classes.toolbar} />
                         {this.props.children}
+                        <FooterComponent styles={{ position: 'absolute', bottom: 0 }} />
                     </main>
                 </div >
             );

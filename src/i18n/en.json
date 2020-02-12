@@ -5,13 +5,15 @@
     "englishShort": "EN",
     "portugueseShort": "PT",
     "englishFull": "(EN) English",
-    "portugueseFull": "(PT) Portuguese"
+    "portugueseFull": "(PT) Portuguese",
+    "email": "E-mail Address",
+    "cancel": "Cancel",
+    "submit": "Submit"
   },
   "app": {
     "name": "Physio Manager"
   },
   "login": {
-    "email": "E-mail Address",
     "password": "Password",
     "repeatPassword": "Repeat Password",
     "signin": "Sign In",
@@ -28,7 +30,13 @@
   },
   "loginValidation": {
     "must not be blank": "mandatory",
-    "size must be between 3 and 20": "size must be between 6 and 20",
+    "size must be between 6 and 20": "size must be between 6 and 20",
+    "must be a well-formed email address": "must be a well-formed email address",
+    "Bad credentials": "Invalid credentials"
+  },
+  "patientProfileValidation": {
+    "must not be blank": "mandatory",
+    "size must be between 6 and 120": "size must be between 6 and 120",
     "must be a well-formed email address": "must be a well-formed email address",
     "Bad credentials": "Invalid credentials"
   },
@@ -46,7 +54,8 @@
     "dashboard": "Dashboard",
     "patients": "Patients",
     "apointments": "Apointments",
-    "pathologies": "Pathologies"
+    "pathologies": "Pathologies",
+    "patientProfile": "Patient Profile"
   },
   "topNav": {
     "myAccount": "My account",
@@ -63,7 +72,13 @@
     "email": "E-mail",
     "address": "Address",
     "addPatient": "Add Patient",
-    "editPatient": "Edit Patient"
+    "addPatientSuccess": "Patient Added",
+    "editPatient": "Edit Patient",
+    "editPatientSuccess": "Patient Edited",
+    "saveChanges": "Save Changes",
+    "saveChangesSuccess": "Changes Saved",
+    "discardChanges": "Discard Changes",
+    "discardChangesSuccess": "Changes Discarded"
   },
   "apointments": {
     "welcome": "Schedule People"

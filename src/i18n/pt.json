@@ -5,13 +5,15 @@
     "englishShort": "EN",
     "portugueseShort": "PT",
     "englishFull": "(EN) Inglês",
-    "portugueseFull": "(PT) Português"
+    "portugueseFull": "(PT) Português",
+    "email": "Endereço de e-mail",
+    "cancel": "Cancelar",
+    "submit": "Submeter"
   },
   "app": {
     "name": "Physio Manager"
   },
   "login": {
-    "email": "Endereço de e-mail",
     "password": "Password",
     "repeatPassword": "Repita Password",
     "signin": "Entrar",
@@ -28,7 +30,13 @@
   },
   "loginValidation": {
     "must not be blank": "obrigatório",
-    "size must be between 3 and 20": "tem de ter entre 6 e 20 caracteres",
+    "size must be between 6 and 20": "tem de ter entre 6 e 20 caracteres",
+    "must be a well-formed email address": "endereço de email inválido",
+    "Bad credentials": "Credenciais inválidas"
+  },
+  "patientProfileValidation": {
+    "must not be blank": "obrigatório",
+    "size must be between 6 and 20": "tem de ter entre 6 e 120 caracteres",
     "must be a well-formed email address": "endereço de email inválido",
     "Bad credentials": "Credenciais inválidas"
   },
@@ -46,7 +54,8 @@
     "dashboard": "Dashboard",
     "patients": "Pacientes",
     "apointments": "Marcações",
-    "pathologies": "Patologias"
+    "pathologies": "Patologias",
+    "patientProfile": "Perfil de Paciente"
   },
   "topNav": {
     "myAccount": "A minha conta",
@@ -63,7 +72,13 @@
     "email": "E-mail",
     "address": "Morada",
     "addPatient": "Criar Paciente",
-    "editPatient": "Editar Patiente"
+    "addPatientSuccess": "Paciente Adicionado",
+    "editPatient": "Editar Patiente",
+    "editPatientSuccess": "Patiente Editado",
+    "saveChanges": "Guardar Mudanças",
+    "saveChangesSuccess": "Mudanças Guardadas",
+    "discardChanges": "Descartar Mudanças",
+    "discardChangesSuccess": "Mudanças Descartadas"
   },
   "apointments": {
     "welcome": "Marcar Situações"

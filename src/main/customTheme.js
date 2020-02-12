@@ -53,6 +53,15 @@ export default createMuiTheme({
       colorPrimary: {
         color: appConstants.PRIMARY_INFO_MAIN
       }
-    }
+    },
+    // MuiInput: {
+    //   underline: {
+    //     // backgroundColor: '#FFF',
+    //     '&:before': {
+    //       // borderBottomColor: '#FFF'
+
+    //     }
+    //   }
+    // }
   }
 });
