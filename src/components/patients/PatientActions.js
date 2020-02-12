@@ -58,7 +58,6 @@ export function createPatient(patient) {
                 dispatch([
                     {
                         type: PatientActionTypes.CREATE_PATIENT,
-                        payload: false
                     }
                 ])
             })
@@ -86,24 +85,37 @@ export function createPatient(patient) {
     }
 }
 
-export function updatePatient(id) {
+export function updatePatient(patient) {
     return dispatch => {
-        axios.put(`${BASE_URL}/patients/${id}`)
+        axios.put(`${BASE_URL}/patients/${patient.id}`, patient)
             .then(response => {
                 dispatch([
                     {
                         type: PatientActionTypes.UPDATE_PATIENT,
-                        payload: response
                     }
                 ])
             })
+            .then(response => this.getAllPatients())
+            //success message
+            .then(response => { toastr.success(I18n.t('toastr.sucess'), I18n.t('patients.editPatientSuccess')) })
             .catch(e => {
+                //if error message is ApiResponse
                 if (_.get(e, ['response', 'data', 'message'], false)) {
-                    toastr.error(I18n.t('toastr.error'), I18n.t(`toastr.${e.response.data.message}`))
+                    dispatch({
+                        type: PatientActionTypes.GET_ERRORS,
+                        payload: {}
+                    });
+                    toastr.error(I18n.t('toastr.error'), e.response.data.message)
+                    //if error message is provided by Spring Valid
+                } else if (_.get(e, ['response', 'data'], false)) {
+                    dispatch({
+                        type: PatientActionTypes.GET_ERRORS,
+                        payload: e.response.data
+                    });
                 } else {
                     toastr.error(I18n.t('toastr.error'), e.message)
                 }
-            })
+            });
     }
 }
 
@@ -118,6 +130,7 @@ export function deletePatient(id) {
                     }
                 ])
             })
+            .then(response => this.getAllPatients())
             .catch(e => {
                 if (_.get(e, ['response', 'data', 'message'], false)) {
                     toastr.error(I18n.t('toastr.error'), I18n.t(`toastr.${e.response.data.message}`))
@@ -128,16 +141,9 @@ export function deletePatient(id) {
     }
 }
 
-export function setShowNewPatientState(state) {
+export function setShowPatientDialog(state) {
     return {
-        type: PatientActionTypes.SET_SHOW_NEW_PATIENT_STATE,
-        payload: state
-    }
-}
-
-export function setShowEditPatientState(state) {
-    return {
-        type: PatientActionTypes.SET_SHOW_NEW_PATIENT_STATE,
+        type: PatientActionTypes.SET_SHOW_PATIENT_DIALOG,
         payload: state
     }
 }

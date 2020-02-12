@@ -1,5 +1,3 @@
-import { red } from "@material-ui/core/colors";
-
 export default {
   API_URL: 'http://localhost:8080/api/v1',
   OAPI_URL: 'http://localhost:8080/oapi/auth',

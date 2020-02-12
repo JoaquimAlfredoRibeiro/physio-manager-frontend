@@ -8,7 +8,8 @@
     "portugueseFull": "(PT) Portuguese",
     "email": "E-mail Address",
     "cancel": "Cancel",
-    "submit": "Submit"
+    "submit": "Submit",
+    "irreversible": "This action is irreversible."
   },
   "app": {
     "name": "Physio Manager"
@@ -48,7 +49,8 @@
     "firstPage": "First Page",
     "lastPage": "Last Page",
     "previousPage": "Previous Page",
-    "nextPage": "Next Page"
+    "nextPage": "Next Page",
+    "emptyDataSourceMessage": "No data to display"
   },
   "tabs": {
     "dashboard": "Dashboard",
@@ -78,7 +80,9 @@
     "saveChanges": "Save Changes",
     "saveChangesSuccess": "Changes Saved",
     "discardChanges": "Discard Changes",
-    "discardChangesSuccess": "Changes Discarded"
+    "discardChangesSuccess": "Changes Discarded",
+    "deletePacient": "Delete Pacient",
+    "deletePacientConfirmation": "Are you sure you want to delete the pacient?"
   },
   "apointments": {
     "welcome": "Schedule People"

@@ -21,21 +21,27 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import _ from 'lodash'
 
-import { createPatient, updatePatient, deletePatient, getAllPatients, clearData, clearErrors, setShowNewPatientState, setShowEditPatientState } from './PatientActions'
+import { createPatient, updatePatient, deletePatient, getAllPatients, clearData, clearErrors, setShowPatientDialog } from './PatientActions'
 import { Button, Paper, Typography } from '@material-ui/core';
 import TableTitle from '../common/TableTitle';
-import appConstants from '../../appConstants'
+import ConfirmationDialog from '../common/ConfirmationDialog.component';
 
 const styles = PatientStyles;
 const I18n = require('react-redux-i18n').I18n;
+const NEW_PATIENT = "addPatient";
+const EDIT_PATIENT = "editPatient";
 
 class Patients extends React.Component {
 
     constructor(props) {
         super(props)
         this.props.getAllPatients()
+        this.props.setShowPatientDialog(false)
 
         this.state = {
+            dialogType: '',
+            showDeleteDialog: false,
+            selectedPacientId: '',
             fullName: '',
             email: '',
             phoneNumber: '',
@@ -56,72 +62,118 @@ class Patients extends React.Component {
         return null;
     }
 
+    componentWillUnmount() {
+        this.props.clearData();
+        this.props.clearErrors();
+    }
+
     handleInputChange(e) {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
-    componentWillUnmount() {
-        this.props.clearData();
-        this.props.clearErrors();
-    }
 
     newPatient = () => {
 
-        this.props.setShowNewPatientState(true)
-
         this.setState({
-            fullName: 'asuqwd',
-            email: 'buenastar@gmail.com',
-            phoneNumber: '123123123',
-            address: 'aiai la nas ruas',
-            errors: ''
-        });
-    }
-
-    newPatientClose = () => {
-
-        this.props.setShowNewPatientState(false)
-
-        this.setState({
+            dialogType: NEW_PATIENT,
+            selectedPacientId: '',
             fullName: '',
             email: '',
             phoneNumber: '',
             address: '',
-            errors: ''
+            errors: {}
+        });
+        this.props.setShowPatientDialog(true)
+    }
+
+    dialogClose = () => {
+
+        this.props.setShowPatientDialog(false)
+
+        this.setState({
+            selectedPacientId: '',
+            fullName: '',
+            email: '',
+            phoneNumber: '',
+            address: '',
+            errors: {}
         });
 
         this.props.clearErrors()
     }
 
-    newPatientSubmit = (e) => {
+    dialogSubmit = (e) => {
         e.preventDefault();
+
         const patient = {
+            id: this.state.selectedPacientId,
             fullName: this.state.fullName,
             email: this.state.email,
             phoneNumber: this.state.phoneNumber,
             address: this.state.address,
         }
-        this.props.createPatient(patient)
+
+        if (this.state.dialogType === NEW_PATIENT) {
+            this.props.createPatient(patient)
+        } else if (this.state.dialogType === EDIT_PATIENT) {
+            this.props.updatePatient(patient)
+        }
     }
 
-    // editPatient = (id) => {
-    //     this.setState({ showEditPatient: true });
-    // }
+    editPatient = (row) => {
 
-    // editPatientClose = () => {
-    //     this.setState({ showEditPatient: false });
-    // }
+        this.setState({
+            dialogType: EDIT_PATIENT,
+            selectedPacientId: row.id,
+            fullName: row.fullName,
+            email: row.email,
+            phoneNumber: row.phoneNumber,
+            address: row.address,
+            errors: {}
+        });
+
+        this.props.setShowPatientDialog(true)
+    }
+
+    deletePatientOpen = (id) => {
+
+        this.setState({
+            showDeleteDialog: true,
+            selectedPacientId: id
+        });
+    }
+
+    deletePatientClose = () => {
+        this.setState({
+            showDeleteDialog: false,
+            selectedPacientId: ''
+        });
+    }
+
+    deletePatientAccept = () => {
+
+        this.props.deletePatient(this.state.selectedPacientId)
+
+        this.setState({
+            showDeleteDialog: false,
+            selectedPacientId: ''
+        });
+    }
 
     render() {
 
         const { classes } = this.props;
-        const { patientList, showNewPatient, showEditPatient } = this.props;
+        let { patientList, showPatientDialog } = this.props;
         const { errors } = this.state;
 
         if (!patientList.patients || !patientList.patients.length) {
-            return null
+            patientList.patients = []
+        }
+
+        if (showPatientDialog === undefined) {
+            showPatientDialog = false
         }
 
         return (
@@ -129,22 +181,6 @@ class Patients extends React.Component {
                 {/* <TableTitle text='patients.patientList' /> */}
                 <MaterialTable
                     title={<Typography variant='h5'><Translate value='patients.patientList' /></Typography>}
-                    // components={{
-                    //     Toolbar: props => (
-                    //         <div style={{
-                    //             backgroundColor: appConstants.PRIMARY_INFO_MAIN,
-                    //             background: 'rgb(0,172,193)',
-                    //             background: 'linear-gradient(90deg, rgba(0,172,193,1) 0%, rgba(0,172,193,1) 38%, rgba(14,135,149,1) 99%)',
-                    //             borderRadius: '5px',
-                    //             color: '#FFF',
-                    //             margin: '0 0 15px',
-                    //             boxShadow: '5px 5px 15px -5px rgba(0, 0, 0, 0.42)',
-                    //         }}>
-                    //             <MTableToolbar {...props} />
-                    //         </div>
-                    //     )
-                    // }}
-                    title={`${I18n.t('patients.patientList')}`}
                     columns={
                         [
                             { title: `${I18n.t('patients.fullName')}`, field: 'fullName' },
@@ -157,17 +193,17 @@ class Patients extends React.Component {
                             { id: `${row.id}`, fullName: `${row.fullName}`, phoneNumber: `${row.phoneNumber}`, email: `${row.email}`, address: `${row.address}`, }
                         ))
                     }
-                    // options={{
-                    //     searchFieldStyle: {
-                    //         color: '#FFF',
-                    //     }
-                    // }}
                     actions={
                         [
                             {
                                 icon: 'edit',
                                 tooltip: `${I18n.t('patients.editPatient')}`,
-                                onClick: (event, row) => this.editPatient(row.id)
+                                onClick: (event, row) => this.editPatient(row)
+                            },
+                            {
+                                icon: 'delete',
+                                tooltip: `${I18n.t('patients.deletePacient')}`,
+                                onClick: (event, row) => this.deletePatientOpen(row.id)
                             }
                         ]}
                     localization={{
@@ -184,6 +220,9 @@ class Patients extends React.Component {
                         },
                         toolbar: {
                             searchPlaceholder: `${I18n.t('table.search')}`
+                        },
+                        body: {
+                            emptyDataSourceMessage: `${I18n.t('table.emptyDataSourceMessage')}`
                         }
                     }
                     }
@@ -198,8 +237,9 @@ class Patients extends React.Component {
                 >
                     <Translate value='patients.addPatient' />
                 </Button>
-                <Dialog open={showNewPatient} onClose={this.newPatientClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">{I18n.t('patients.addPatient')}</DialogTitle>
+
+                <Dialog open={showPatientDialog} onClose={this.dialogClose} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">{I18n.t(`patients.${this.state.dialogType}`)}</DialogTitle>
                     <DialogContent>
                         <TextField
                             variant="standard"
@@ -261,14 +301,22 @@ class Patients extends React.Component {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.newPatientClose} color="primary">
+                        <Button onClick={this.dialogClose} color="primary">
                             {I18n.t('global.cancel')}
                         </Button>
-                        <Button onClick={this.newPatientSubmit} color="primary">
+                        <Button onClick={this.dialogSubmit} color="primary">
                             {I18n.t('global.submit')}
                         </Button>
                     </DialogActions>
                 </Dialog>
+
+                <ConfirmationDialog
+                    open={this.state.showDeleteDialog}
+                    handleClose={this.deletePatientClose}
+                    handleAccept={this.deletePatientAccept}
+                    title='patients.deletePacient'
+                    text='patients.deletePacientConfirmation'
+                />
             </div >
         )
     }
@@ -280,10 +328,10 @@ Patients.propTypes = {
 
 const mapStateToProps = state => ({
     patientList: state.patients.patientList,
-    showNewPatient: state.patients.showNewPatient,
+    showPatientDialog: state.patients.showPatientDialog,
     errors: state.errors
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ createPatient, updatePatient, deletePatient, getAllPatients, clearData, clearErrors, setShowNewPatientState, setShowEditPatientState }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ createPatient, updatePatient, deletePatient, getAllPatients, clearData, clearErrors, setShowPatientDialog }, dispatch)
 
 export default AuthRequired(withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(Patients))))

@@ -31,7 +31,6 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
 import navigationStyles from './navigation.styles'
-import Copyright from '../../common/Copyright.component';
 import FooterComponent from '../footer/Footer.component';
 
 const styles = navigationStyles;

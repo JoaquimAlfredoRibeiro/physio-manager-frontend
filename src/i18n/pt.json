@@ -8,7 +8,8 @@
     "portugueseFull": "(PT) Português",
     "email": "Endereço de e-mail",
     "cancel": "Cancelar",
-    "submit": "Submeter"
+    "submit": "Submeter",
+    "irreversible": "Esta ação é irreversível."
   },
   "app": {
     "name": "Physio Manager"
@@ -48,7 +49,8 @@
     "firstPage": "Primeira Página",
     "lastPage": "Última Página",
     "previousPage": "Página Anterior",
-    "nextPage": "Próxima Página"
+    "nextPage": "Próxima Página",
+    "emptyDataSourceMessage": "Não existem dados para mostrar"
   },
   "tabs": {
     "dashboard": "Dashboard",
@@ -78,7 +80,9 @@
     "saveChanges": "Guardar Mudanças",
     "saveChangesSuccess": "Mudanças Guardadas",
     "discardChanges": "Descartar Mudanças",
-    "discardChangesSuccess": "Mudanças Descartadas"
+    "discardChangesSuccess": "Mudanças Descartadas",
+    "deletePacient": "Apagar Paciente",
+    "deletePacientConfirmation": "Tem a certeza que quer apagar este cliente?"
   },
   "apointments": {
     "welcome": "Marcar Situações"

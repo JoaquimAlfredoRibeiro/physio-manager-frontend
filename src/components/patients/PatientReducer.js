@@ -1,6 +1,6 @@
 import PatientActionTypes from "./PatientActionTypes";
 
-const INITIAL_STATE = { patientList: [], showNewPatient: false, showEditPatient: false }
+const INITIAL_STATE = { patientList: [], showPatientDialog: false }
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
@@ -12,25 +12,21 @@ export default (state = INITIAL_STATE, action) => {
         case PatientActionTypes.CREATE_PATIENT:
             return {
                 ...state,
-                showNewPatient: false
+                showPatientDialog: false
             }
         case PatientActionTypes.UPDATE_PATIENT:
             return {
-                patientList: action.payload.data
+                ...state,
+                showPatientDialog: false
             }
         case PatientActionTypes.DELETE_PATIENT:
             return {
-                patientList: action.payload.data
+                ...state
             }
-        case PatientActionTypes.SET_SHOW_NEW_PATIENT_STATE:
+        case PatientActionTypes.SET_SHOW_PATIENT_DIALOG:
             return {
                 ...state,
-                showNewPatient: action.payload
-            }
-        case PatientActionTypes.SET_SHOW_EDIT_PATIENT_STATE:
-            return {
-                ...state,
-                showEditPatient: action.payload
+                showPatientDialog: action.payload
             }
         case PatientActionTypes.CLEAR_DATA:
             return {
