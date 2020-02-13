@@ -41,6 +41,12 @@
     "must be a well-formed email address": "must be a well-formed email address",
     "Bad credentials": "Invalid credentials"
   },
+  "pathologyProfileValidation": {
+    "must not be blank": "mandatory",
+    "size must be between 6 and 120": "size must be between 6 and 120",
+    "must be a well-formed email address": "must be a well-formed email address",
+    "Bad credentials": "Invalid credentials"
+  },
   "table": {
     "displayedRows": "{from}-{to} of {count}",
     "actions": "Actions",
@@ -67,7 +73,7 @@
     "welcome": "Welcome"
   },
   "patients": {
-    "patientList": "Patient List",
+    "patientList": "Patients List",
     "id": "ID",
     "fullName": "Full Name",
     "phoneNumber": "Phone Number",
@@ -77,10 +83,6 @@
     "addPatientSuccess": "Patient Added",
     "editPatient": "Edit Patient",
     "editPatientSuccess": "Patient Edited",
-    "saveChanges": "Save Changes",
-    "saveChangesSuccess": "Changes Saved",
-    "discardChanges": "Discard Changes",
-    "discardChangesSuccess": "Changes Discarded",
     "deletePacient": "Delete Pacient",
     "deletePacientConfirmation": "Are you sure you want to delete the pacient?"
   },
@@ -88,7 +90,15 @@
     "welcome": "Schedule People"
   },
   "pathologies": {
-    "welcome": "Pathologies all Arround"
+    "pathologiesList": "Pathologies List",
+    "name": "Name",
+    "description": "Description",
+    "addPathology": "Add Pathology",
+    "addPathologySuccess": "Pathology Added",
+    "editPathology": "Edit Pathology",
+    "editPathologySuccess": "Pathology Edited",
+    "deletePathology": "Delete Pathology",
+    "deletePathologyConfirmation": "Are you sure you want to delete the pathology?"
   },
   "toastr": {
     "success": "Success",

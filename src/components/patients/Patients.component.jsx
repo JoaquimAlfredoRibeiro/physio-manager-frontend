@@ -16,7 +16,6 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import _ from 'lodash'
@@ -24,6 +23,7 @@ import _ from 'lodash'
 import { createPatient, updatePatient, deletePatient, getAllPatients, clearData, clearErrors, setShowPatientDialog } from './PatientActions'
 import { Button, Paper, Typography } from '@material-ui/core';
 import TableTitle from '../common/TableTitle';
+import FormTitle from '../common/FormTitle';
 import ConfirmationDialog from '../common/ConfirmationDialog.component';
 
 const styles = PatientStyles;
@@ -178,9 +178,10 @@ class Patients extends React.Component {
 
         return (
             <div className={classes.root}>
-                {/* <TableTitle text='patients.patientList' /> */}
+                <TableTitle text='patients.patientList' />
                 <MaterialTable
-                    title={<Typography variant='h5'><Translate value='patients.patientList' /></Typography>}
+                    // title={<Typography variant='h5'><Translate value='patients.patientList' /></Typography>}
+                    title=''
                     columns={
                         [
                             { title: `${I18n.t('patients.fullName')}`, field: 'fullName' },

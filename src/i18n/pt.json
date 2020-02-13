@@ -41,6 +41,12 @@
     "must be a well-formed email address": "endereço de email inválido",
     "Bad credentials": "Credenciais inválidas"
   },
+  "pathologyProfileValidation": {
+    "must not be blank": "mandatory",
+    "size must be between 6 and 120": "size must be between 6 and 120",
+    "must be a well-formed email address": "must be a well-formed email address",
+    "Bad credentials": "Invalid credentials"
+  },
   "table": {
     "displayedRows": "{from}-{to} de {count}",
     "actions": "Ações",
@@ -77,18 +83,22 @@
     "addPatientSuccess": "Paciente Adicionado",
     "editPatient": "Editar Patiente",
     "editPatientSuccess": "Patiente Editado",
-    "saveChanges": "Guardar Mudanças",
-    "saveChangesSuccess": "Mudanças Guardadas",
-    "discardChanges": "Descartar Mudanças",
-    "discardChangesSuccess": "Mudanças Descartadas",
     "deletePacient": "Apagar Paciente",
-    "deletePacientConfirmation": "Tem a certeza que quer apagar este cliente?"
+    "deletePacientConfirmation": "Tem a certeza que quer apagar este paciente?"
   },
   "apointments": {
     "welcome": "Marcar Situações"
   },
   "pathologies": {
-    "welcome": "Maleitas e afins"
+    "pathologiesList": "Lista de Patologias",
+    "name": "Nome",
+    "description": "Descrição",
+    "addPathology": "Criar Patologia",
+    "addPathologySuccess": "Patologia Adicionada",
+    "editPathology": "Editar Patologia",
+    "editPathologySuccess": "Patologia Editada",
+    "deletePathology": "Apagar Patologia",
+    "deletePathologyConfirmation": "Tem a certeza que quer apagar esta patologia?"
   },
   "toastr": {
     "success": "Sucesso",
