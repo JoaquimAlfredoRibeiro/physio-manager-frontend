@@ -58,6 +58,12 @@
     "nextPage": "Próxima Página",
     "emptyDataSourceMessage": "Não existem dados para mostrar"
   },
+  "calendar": {
+    "today": "Hoje",
+    "day": "Dia",
+    "week": "Semana",
+    "month": "Mês"
+  },
   "tabs": {
     "dashboard": "Dashboard",
     "patients": "Pacientes",

@@ -22,7 +22,11 @@ import {
     AppointmentTooltip,
     ConfirmationDialog,
     Toolbar,
-    ViewSwitcher
+    ViewSwitcher,
+    DragDropProvider,
+    DateNavigator,
+    TodayButton,
+    CurrentTimeIndicator
 } from '@devexpress/dx-react-scheduler-material-ui';
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { blue } from "@material-ui/core/colors";
@@ -84,6 +88,9 @@ class Apointments extends React.Component {
 
     render() {
         const { currentDate, data } = this.state;
+        const { locale } = this.props;
+
+        console.log(locale)
 
         return (
             <MuiThemeProvider theme={theme}>
@@ -91,26 +98,33 @@ class Apointments extends React.Component {
                     <Scheduler
                         data={data}
                         maxHeight={630}
+                        locale={locale}
                     >
                         <ViewState
-                            currentDate={currentDate}
+                            defaultCurrentDate={currentDate}
                             defaultCurrentViewName="Week"
                         />
                         <EditingState
                             onCommitChanges={this.commitChanges}
                         />
                         <IntegratedEditing />
+                        <Toolbar />
+                        <DateNavigator />
+                        <TodayButton messages={{ today: `${I18n.t('calendar.today')}` }} />
                         <DayView
                             cellDuration={60}
                             startDayHour={9}
                             endDayHour={19}
+                            displayName={`${I18n.t('calendar.day')}`}
                         />
                         <WeekView
                             cellDuration={60}
                             startDayHour={9}
                             endDayHour={19}
+                            displayName={`${I18n.t('calendar.week')}`}
                         />
-                        <MonthView />
+                        <MonthView
+                            displayName={`${I18n.t('calendar.month')}`} />
                         <ConfirmationDialog />
                         <Appointments />
                         <AppointmentTooltip
@@ -118,8 +132,13 @@ class Apointments extends React.Component {
                             showDeleteButton
                         />
                         <AppointmentForm />
-                        <Toolbar />
+                        <DragDropProvider />
                         <ViewSwitcher />
+                        <CurrentTimeIndicator
+                            shadePreviousCells={true}
+                            shadePreviousAppointments={true}
+                            updateInterval={1800000}
+                        />
                     </Scheduler>
                 </Paper>
             </MuiThemeProvider>
@@ -129,7 +148,7 @@ class Apointments extends React.Component {
 
 
 const mapStateToProps = state => ({
-    // pathologiesList: state.pathologies.pathologiesList,
+    locale: state.i18n.locale,
     // showPathologyDialog: state.pathologies.showPathologyDialog,
     // errors: state.errors
 })
