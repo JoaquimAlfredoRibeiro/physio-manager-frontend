@@ -11,5 +11,10 @@ export default theme => ({
         alignContent: 'flex-start',
         flexGrow: 1,
         width: 'fit-content'
-    }
+    },
+    addButton: {
+        position: 'absolute',
+        bottom: theme.spacing(7),
+        right: theme.spacing(5),
+    },
 });

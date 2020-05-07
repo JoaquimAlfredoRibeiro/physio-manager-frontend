@@ -4,7 +4,7 @@ import Link from '@material-ui/core/Link';
 
 export default props => (
     <div style={{
-        position: 'fixed',
+        position: 'absolute',
         bottom: '0px',
         right: '0px',
         padding: '10px 20px'

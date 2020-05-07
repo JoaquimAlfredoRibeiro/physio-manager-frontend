@@ -9,7 +9,14 @@
     "email": "E-mail Address",
     "cancel": "Cancel",
     "submit": "Submit",
-    "irreversible": "This action is irreversible."
+    "irreversible": "This action is irreversible.",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "location": "Location",
+    "notes": "Notes",
+    "create": "Create",
+    "save": "Save",
+    "delete": "Delete"
   },
   "app": {
     "name": "Physio Manager"
@@ -67,7 +74,7 @@
   "tabs": {
     "dashboard": "Dashboard",
     "patients": "Patients",
-    "apointments": "Apointments",
+    "appointments": "Appointments",
     "pathologies": "Pathologies",
     "patientProfile": "Patient Profile"
   },
@@ -92,8 +99,14 @@
     "deletePacient": "Delete Pacient",
     "deletePacientConfirmation": "Are you sure you want to delete the pacient?"
   },
-  "apointments": {
-    "welcome": "Schedule People"
+  "appointments": {
+    "patientPicker": "Patient",
+    "addAppointment": "Add Appointment",
+    "addAppointmentSuccess": "Appointment Added",
+    "editAppointment": "Edit Appointment",
+    "editAppointmentSuccess": "Appointment Edited",
+    "deleteAppointment": "Delete Appointment",
+    "deleteConfirmation": "Are you sure you want to delete this appointment?"
   },
   "pathologies": {
     "pathologiesList": "Pathologies List",

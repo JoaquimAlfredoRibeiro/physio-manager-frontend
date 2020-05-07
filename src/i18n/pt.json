@@ -9,7 +9,14 @@
     "email": "Endereço de e-mail",
     "cancel": "Cancelar",
     "submit": "Submeter",
-    "irreversible": "Esta ação é irreversível."
+    "irreversible": "Esta ação é irreversível.",
+    "startDate": "Data de Início",
+    "endDate": "Date de Fim",
+    "location": "Local",
+    "notes": "Notas",
+    "create": "Criar",
+    "save": "Salvar",
+    "delete": "Apagar"
   },
   "app": {
     "name": "Physio Manager"
@@ -67,7 +74,7 @@
   "tabs": {
     "dashboard": "Dashboard",
     "patients": "Pacientes",
-    "apointments": "Marcações",
+    "appointments": "Marcações",
     "pathologies": "Patologias",
     "patientProfile": "Perfil de Paciente"
   },
@@ -92,8 +99,14 @@
     "deletePacient": "Apagar Paciente",
     "deletePacientConfirmation": "Tem a certeza que quer apagar este paciente?"
   },
-  "apointments": {
-    "welcome": "Marcar Situações"
+  "appointments": {
+    "patientPicker": "Paciente",
+    "addAppointment": "Criar Marcação",
+    "addAppointmentSuccess": "Marcação Adicionada",
+    "editAppointment": "Editar Marcação",
+    "editAppointmentSuccess": "Marcação Editada",
+    "deleteAppointment": "Apagar Marcação",
+    "deleteConfirmation": "Tem a certeza que pretende apagar a marcação?"
   },
   "pathologies": {
     "pathologiesList": "Lista de Patologias",

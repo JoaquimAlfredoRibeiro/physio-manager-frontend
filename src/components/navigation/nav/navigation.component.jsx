@@ -66,8 +66,8 @@ class MiniDrawer extends React.Component {
                 return <Translate value='tabs.dashboard' />
             case '/patients':
                 return <Translate value='tabs.patients' />
-            case '/apointments':
-                return <Translate value='tabs.apointments' />
+            case '/appointments':
+                return <Translate value='tabs.appointments' />
             case '/pathologies':
                 return <Translate value='tabs.pathologies' />
             case '/patientProfile':
@@ -142,9 +142,9 @@ class MiniDrawer extends React.Component {
                                 <ListItemIcon ><AssignmentIndIcon className={classes.backgrounColorText} /></ListItemIcon>
                                 <ListItemText className={classes.backgrounColorText} primary={<Translate value='tabs.patients' />} />
                             </ListItem>
-                            <ListItem className={this.isTabActive('/apointments') ? classes.activeSidebarButton : classes.sidebarButton} button onClick={() => this.redirect("/apointments")} key={'apointments'} >
+                            <ListItem className={this.isTabActive('/appointments') ? classes.activeSidebarButton : classes.sidebarButton} button onClick={() => this.redirect("/appointments")} key={'appointments'} >
                                 <ListItemIcon ><TodayIcon className={classes.backgrounColorText} /></ListItemIcon>
-                                <ListItemText className={classes.whiteText} primary={<Translate value={'tabs.apointments'} />} />
+                                <ListItemText className={classes.whiteText} primary={<Translate value={'tabs.appointments'} />} />
                             </ListItem>
                             <ListItem className={this.isTabActive('/pathologies') ? classes.activeSidebarButton : classes.sidebarButton} button onClick={() => this.redirect("/pathologies")} key={'pathologies'} >
                                 <ListItemIcon ><LocalHospitalIcon className={classes.backgrounColorText} /></ListItemIcon>
