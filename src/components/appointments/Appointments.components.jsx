@@ -54,21 +54,6 @@ import { mockComponent } from 'react-dom/test-utils';
 const styles = AppointmentStyles;
 const I18n = require('react-redux-i18n').I18n;
 
-const appointmentsList = [{
-    title: "Website Re-Design Plan",
-    startDate: new Date(2020, 2, 13, 9, 30),
-    endDate: new Date(2020, 2, 13, 11, 30),
-    id: 0,
-    location: "Room 1"
-},
-{
-    title: "Book Flights to San Fran for Sales Trip",
-    startDate: new Date(2020, 2, 13, 12, 0),
-    endDate: new Date(2020, 2, 13, 15, 0),
-    id: 1,
-    location: "Room 1"
-}]
-
 const theme = createMuiTheme({ palette: { type: "light", primary: blue } });
 
 class AppointmentsComp extends React.Component {
@@ -79,10 +64,9 @@ class AppointmentsComp extends React.Component {
         let today = new Date(),
             date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
-        const appointmentsLists = this.props.getAllAppointments()
+        this.props.getAllAppointments()
 
         this.state = {
-            data: appointmentsList,
             currentDate: date,
             confirmationVisible: false,
             editingFormVisible: false,
@@ -105,13 +89,14 @@ class AppointmentsComp extends React.Component {
             const {
                 editingFormVisible,
                 editingAppointment,
-                data,
                 addedAppointment,
                 isNewAppointment,
                 previousAppointment
             } = this.state;
 
-            const currentAppointment = data
+            const { appointmentsList } = this.props
+
+            const currentAppointment = appointmentsList
                 .filter(appointment => editingAppointment && appointment.id === editingAppointment.id)[0]
                 || addedAppointment;
             const cancelAppointment = () => {
@@ -122,6 +107,10 @@ class AppointmentsComp extends React.Component {
                     });
                 }
             };
+
+            const currentPatient = this.getCurrentPatientById(currentAppointment.tempPatientId)
+
+            currentAppointment.patient = currentPatient
 
             return {
                 visible: editingFormVisible,
@@ -136,6 +125,18 @@ class AppointmentsComp extends React.Component {
 
     componentDidUpdate() {
         this.appointmentForm.update();
+    }
+
+    getCurrentPatientById = (id) => {
+        if (this.props.patientList.patients) {
+            const currentPatient = this.props.patientList.patients.filter(
+                patient => patient.id === id
+            );
+
+            return currentPatient[0]
+        }
+
+        return {}
     }
 
     onEditingAppointmentChange(editingAppointment) {
@@ -171,54 +172,50 @@ class AppointmentsComp extends React.Component {
 
     commitDeletedAppointment() {
         this.setState((state) => {
-            const { data, deletedAppointmentId } = state;
-            const nextData = data.filter(appointment => appointment.id !== deletedAppointmentId);
+            const { deletedAppointmentId } = state;
+            const { patientList } = this.props;
+            const nextData = patientList.filter(appointment => appointment.id !== deletedAppointmentId);
 
-            return { data: nextData, deletedAppointmentId: null };
+            return { patientList: nextData, deletedAppointmentId: null };
         });
         this.toggleConfirmationVisible();
     }
 
     commitChanges({ added, changed, deleted }) {
         this.setState((state) => {
-            let { data } = state;
+            let { patientList } = this.props;
             if (added) {
-                console.log("ADDING APPOINTMENT")
-                console.log(added)
-
                 const modifiedAdded = this.modifyAdded(added)
 
-                console.log("MODIFIED APPOINTMENT")
                 console.log(modifiedAdded)
 
                 this.props.createAppointment(modifiedAdded)
 
-                const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0;
-                data = [...data, { id: startingAddedId, ...added }];
+                const startingAddedId = patientList.patients.length > 0 ? patientList.patients[patientList.patients.length - 1].id + 1 : 0;
+                patientList.patients = [...patientList.patients, { id: startingAddedId, ...added }];
             }
             if (changed) {
-                data = data.map(appointment => (
+                patientList.patients = patientList.patients.map(appointment => (
                     changed[appointment.id] ? { ...appointment, ...changed[appointment.id] } : appointment));
             }
             if (deleted !== undefined) {
                 this.setDeletedAppointmentId(deleted);
                 this.toggleConfirmationVisible();
             }
-            return { data, addedAppointment: {} };
+            return { patientList, addedAppointment: {} };
         });
     }
 
     modifyAdded(added) {
+
         return {
             ...added,
-            startDate: '2019-03-11T10:08:28.097832',
-            endDate: '2019-03-11T11:08:28.097832'
+            tempPatientId: added.patient.id
         }
     }
 
     render() {
         const { currentDate,
-            data,
             confirmationVisible,
             editingFormVisible } = this.state;
         const { classes, locale } = this.props;
@@ -227,7 +224,7 @@ class AppointmentsComp extends React.Component {
             <MuiThemeProvider theme={theme}>
                 <Paper>
                     <Scheduler
-                        data={data}
+                        data={this.props.appointmentsList}
                         maxHeight={630}
                         locale={locale}
                     >
@@ -325,6 +322,7 @@ class AppointmentsComp extends React.Component {
 const mapStateToProps = state => ({
     locale: state.i18n.locale,
     appointmentsList: state.appointments.appointmentsList,
+    patientList: state.patients.patientList,
     // errors: state.errors
 })
 

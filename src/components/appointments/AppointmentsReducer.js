@@ -7,7 +7,7 @@ export default (state = INITIAL_STATE, action) => {
         case AppointmentsActionTypes.GET_ALL_APPOINTMENTS:
             return {
                 ...state,
-                appointmentsList: action.payload.data
+                appointmentsList: action.payload.data.consultations
             }
         case AppointmentsActionTypes.CREATE_APPOINTMENT:
             return {

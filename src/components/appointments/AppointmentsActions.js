@@ -13,7 +13,6 @@ export function getAllAppointments() {
     return dispatch => {
         axios.get(`${BASE_URL}`)
             .then(response => {
-                console.log(response.data)
                 dispatch([
                     {
                         type: AppointmentsActionTypes.GET_ALL_APPOINTMENTS,
