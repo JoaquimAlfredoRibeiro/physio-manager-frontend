@@ -11,5 +11,5 @@ export default theme => ({
         alignContent: 'flex-start',
         flexGrow: 1,
         width: 'fit-content'
-    }
+    },
 });

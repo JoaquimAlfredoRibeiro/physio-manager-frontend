@@ -30,6 +30,27 @@ export function getAllPatients() {
     }
 }
 
+export function getPatientInfo(id) {
+    return dispatch => {
+        axios.get(`${BASE_URL}`)
+            .then(response => {
+                dispatch([
+                    {
+                        type: PatientActionTypes.GET_ALL_PATIENTS,
+                        payload: response
+                    }
+                ])
+            })
+            .catch(e => {
+                if (_.get(e, ['response', 'data', 'message'], false)) {
+                    toastr.error(I18n.t('toastr.error'), I18n.t(`toastr.${e.response.data.message}`))
+                } else {
+                    toastr.error(I18n.t('toastr.error'), e.message)
+                }
+            })
+    }
+}
+
 export function createPatient(patient) {
     return dispatch => {
         axios.post(`${BASE_URL}`, patient)
@@ -124,6 +145,13 @@ export function setShowPatientDialog(state) {
     return {
         type: PatientActionTypes.SET_SHOW_PATIENT_DIALOG,
         payload: state
+    }
+}
+
+export function setSelectedPatient(id) {
+    return {
+        type: PatientActionTypes.SET_SELECTED_PATIENT,
+        payload: id
     }
 }
 

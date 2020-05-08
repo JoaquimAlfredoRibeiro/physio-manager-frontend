@@ -70,7 +70,7 @@ class MiniDrawer extends React.Component {
                 return <Translate value='tabs.appointments' />
             case '/pathologies':
                 return <Translate value='tabs.pathologies' />
-            case '/patientProfile':
+            case '/patientprofile':
                 return <Translate value='tabs.patientProfile' />
             default:
                 return ''

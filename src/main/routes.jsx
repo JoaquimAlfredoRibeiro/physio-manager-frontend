@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Navigation from '../components/navigation/nav/navigation.component'
 import Dashboard from '../components/dashboard/Dashboard.component'
 import Patients from '../components/patients/Patients.component'
+import PatientProfile from '../components/patients/PatientProfile.component'
 import Appointments from '../components/appointments/Appointments.components'
 import Pathologies from '../components/pathologies/Pathologies.component'
 import Messages from '../components/common/Messages'
@@ -16,6 +17,7 @@ export default props => (
         <Switch>
           <Route exact path="/" component={Dashboard} />
           <Route path="/patients" component={Patients} />
+          <Route path="/patientprofile" component={PatientProfile} />
           <Route path="/appointments" component={Appointments} />
           <Route path="/pathologies" component={Pathologies} />
           <Route path="/auth" component={Authorization} />

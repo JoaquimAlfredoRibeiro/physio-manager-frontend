@@ -16,7 +16,8 @@
     "notes": "Notas",
     "create": "Criar",
     "save": "Salvar",
-    "delete": "Apagar"
+    "delete": "Apagar",
+    "profile": "Perfil"
   },
   "app": {
     "name": "Physio Manager"
@@ -97,7 +98,9 @@
     "editPatient": "Editar Patiente",
     "editPatientSuccess": "Patiente Editado",
     "deletePacient": "Apagar Paciente",
-    "deletePacientConfirmation": "Tem a certeza que quer apagar este paciente?"
+    "deletePacientConfirmation": "Tem a certeza que quer apagar este paciente?",
+    "viewProfile": "Ver Perfil",
+    "treatmentHistory": "Histórico de Tratamento"
   },
   "appointments": {
     "patientPicker": "Paciente",

@@ -20,7 +20,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import _ from 'lodash'
 
-import { createPatient, updatePatient, deletePatient, getAllPatients, clearData, clearErrors, setShowPatientDialog } from './PatientActions'
+import { createPatient, updatePatient, deletePatient, getAllPatients, clearData, clearErrors, setShowPatientDialog, setSelectedPatient } from './PatientActions'
 import { Button, Paper, Typography } from '@material-ui/core';
 import TableTitle from '../common/TableTitle';
 import FormTitle from '../common/FormTitle';
@@ -137,6 +137,11 @@ class Patients extends React.Component {
         this.props.setShowPatientDialog(true)
     }
 
+    viewProfile = (row) => {
+        this.props.setSelectedPatient(row.id)
+        this.props.history.push('/patientprofile');
+    }
+
     deletePatientOpen = (id) => {
 
         this.setState({
@@ -196,6 +201,11 @@ class Patients extends React.Component {
                     }
                     actions={
                         [
+                            {
+                                icon: 'face',
+                                tooltip: `${I18n.t('patients.viewProfile')}`,
+                                onClick: (event, row) => this.viewProfile(row)
+                            },
                             {
                                 icon: 'edit',
                                 tooltip: `${I18n.t('patients.editPatient')}`,
@@ -333,6 +343,6 @@ const mapStateToProps = state => ({
     errors: state.errors
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ createPatient, updatePatient, deletePatient, getAllPatients, clearData, clearErrors, setShowPatientDialog }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ createPatient, updatePatient, deletePatient, getAllPatients, clearData, clearErrors, setShowPatientDialog, setSelectedPatient }, dispatch)
 
 export default AuthRequired(withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(Patients))))
