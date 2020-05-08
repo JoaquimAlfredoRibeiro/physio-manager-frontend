@@ -13,24 +13,18 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state
             }
-        // case PathologiesActionTypes.UPDATE_PATHOLOGY:
-        //     return {
-        //         ...state,
-        //         showPathologyDialog: false
-        //     }
-        // case PathologiesActionTypes.DELETE_PATHOLOGY:
-        //     return {
-        //         ...state
-        //     }
-        // case PathologiesActionTypes.SET_SHOW_PATHOLOGY_DIALOG:
-        //     return {
-        //         ...state,
-        //         showPathologyDialog: action.payload
-        //     }
-        // case PathologiesActionTypes.CLEAR_DATA:
-        //     return {
-        //         pathologiesList: {}
-        //     }
+        case AppointmentsActionTypes.UPDATE_APPOINTMENT:
+            return {
+                ...state
+            }
+        case AppointmentsActionTypes.DELETE_APPOINTMENT:
+            return {
+                ...state
+            }
+        case AppointmentsActionTypes.CLEAR_DATA:
+            return {
+                appointmentsList: []
+            }
         default:
             return state
     }

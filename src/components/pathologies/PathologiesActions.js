@@ -42,7 +42,7 @@ export function createPathology(pathology) {
             })
             .then(response => this.getAllPathologies())
             //success message
-            .then(response => { toastr.success(I18n.t('toastr.sucess'), I18n.t('pathologies.addPathologySuccess')) })
+            .then(response => { toastr.success(I18n.t('toastr.success'), I18n.t('pathologies.addPathologySuccess')) })
             .catch(e => {
                 //if error message is ApiResponse
                 if (_.get(e, ['response', 'data', 'message'], false)) {
@@ -76,7 +76,7 @@ export function updatePathology(pathology) {
             })
             .then(response => this.getAllPathologies())
             //success message
-            .then(response => { toastr.success(I18n.t('toastr.sucess'), I18n.t('pathologies.editPathologySuccess')) })
+            .then(response => { toastr.success(I18n.t('toastr.success'), I18n.t('pathologies.editPathologySuccess')) })
             .catch(e => {
                 //if error message is ApiResponse
                 if (_.get(e, ['response', 'data', 'message'], false)) {

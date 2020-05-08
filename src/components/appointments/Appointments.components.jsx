@@ -48,7 +48,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import PacientPickerComponent from '../common/PatientPicker.component';
 
-import { getAllAppointments, createAppointment } from './AppointmentsActions'
+import { getAllAppointments, createAppointment, updateAppointment, deleteAppointment } from './AppointmentsActions'
 import { mockComponent } from 'react-dom/test-utils';
 
 const styles = AppointmentStyles;
@@ -85,42 +85,47 @@ class AppointmentsComp extends React.Component {
         this.onEditingAppointmentChange = this.onEditingAppointmentChange.bind(this);
         this.onAddedAppointmentChange = this.onAddedAppointmentChange.bind(this);
 
-        this.appointmentForm = connectProps(CustomAppointmentForm, () => {
-            const {
-                editingFormVisible,
-                editingAppointment,
-                addedAppointment,
-                isNewAppointment,
-                previousAppointment
-            } = this.state;
+        try {
+            this.appointmentForm = connectProps(CustomAppointmentForm, () => {
+                const {
+                    editingFormVisible,
+                    editingAppointment,
+                    addedAppointment,
+                    isNewAppointment,
+                    previousAppointment
+                } = this.state;
 
-            const { appointmentsList } = this.props
+                const { appointmentsList } = this.props
 
-            const currentAppointment = appointmentsList
-                .filter(appointment => editingAppointment && appointment.id === editingAppointment.id)[0]
-                || addedAppointment;
-            const cancelAppointment = () => {
-                if (isNewAppointment) {
-                    this.setState({
-                        editingAppointment: previousAppointment,
-                        isNewAppointment: false,
-                    });
-                }
-            };
+                const currentAppointment = appointmentsList
+                    .filter(appointment => editingAppointment && appointment.id === editingAppointment.id)[0]
+                    || addedAppointment;
+                const cancelAppointment = () => {
+                    if (isNewAppointment) {
+                        this.setState({
+                            editingAppointment: previousAppointment,
+                            isNewAppointment: false,
+                        });
+                    }
+                };
 
-            const currentPatient = this.getCurrentPatientById(currentAppointment.tempPatientId)
+                const currentPatient = this.getCurrentPatientById(currentAppointment.tempPatientId)
 
-            currentAppointment.patient = currentPatient
+                currentAppointment.patient = currentPatient
 
-            return {
-                visible: editingFormVisible,
-                appointmentData: currentAppointment,
-                commitChanges: this.commitChanges,
-                visibleChange: this.toggleEditingFormVisibility,
-                onEditingAppointmentChange: this.onEditingAppointmentChange,
-                cancelAppointment,
-            };
-        });
+                return {
+                    visible: editingFormVisible,
+                    appointmentData: currentAppointment,
+                    commitChanges: this.commitChanges,
+                    visibleChange: this.toggleEditingFormVisibility,
+                    onEditingAppointmentChange: this.onEditingAppointmentChange,
+                    cancelAppointment,
+                };
+            });
+        } catch (error) {
+
+        }
+
     }
 
     componentDidUpdate() {
@@ -173,34 +178,47 @@ class AppointmentsComp extends React.Component {
     commitDeletedAppointment() {
         this.setState((state) => {
             const { deletedAppointmentId } = state;
-            const { patientList } = this.props;
-            const nextData = patientList.filter(appointment => appointment.id !== deletedAppointmentId);
+            const { appointmentsList } = this.props;
+            const nextData = appointmentsList.filter(appointment => appointment.id !== deletedAppointmentId);
 
-            return { patientList: nextData, deletedAppointmentId: null };
+            return { appointmentsList: nextData, deletedAppointmentId: null };
         });
         this.toggleConfirmationVisible();
     }
 
     commitChanges({ added, changed, deleted }) {
         this.setState((state) => {
-            let { patientList } = this.props;
+            let { patientList, appointmentsList } = this.props;
             if (added) {
                 const modifiedAdded = this.modifyAdded(added)
 
-                console.log(modifiedAdded)
-
                 this.props.createAppointment(modifiedAdded)
-
-                const startingAddedId = patientList.patients.length > 0 ? patientList.patients[patientList.patients.length - 1].id + 1 : 0;
-                patientList.patients = [...patientList.patients, { id: startingAddedId, ...added }];
             }
             if (changed) {
-                patientList.patients = patientList.patients.map(appointment => (
-                    changed[appointment.id] ? { ...appointment, ...changed[appointment.id] } : appointment));
+
+                const appointmentId = Object.keys(changed)[0]
+
+                let updatedAppointment = {}
+
+                for (let index = 0; index < appointmentsList.length; index++) {
+
+                    updatedAppointment = { ...appointmentsList[index] }
+
+                    if (appointmentsList[index].id == appointmentId) {
+                        if (changed[appointmentId].patient != undefined) {
+                            updatedAppointment.tempPatientId = changed[appointmentId].patient.id
+                        }
+                        updatedAppointment.startDate = changed[appointmentId].startDate
+                        updatedAppointment.endDate = changed[appointmentId].endDate
+                        updatedAppointment.location = changed[appointmentId].location
+                        updatedAppointment.notes = changed[appointmentId].notes
+                    }
+                }
+
+                this.props.updateAppointment(updatedAppointment)
             }
             if (deleted !== undefined) {
-                this.setDeletedAppointmentId(deleted);
-                this.toggleConfirmationVisible();
+                this.props.deleteAppointment(deleted)
             }
             return { patientList, addedAppointment: {} };
         });
@@ -220,11 +238,17 @@ class AppointmentsComp extends React.Component {
             editingFormVisible } = this.state;
         const { classes, locale } = this.props;
 
+        let apData = []
+
+        for (let index = 0; index < this.props.appointmentsList.length; index++) {
+            apData.push(this.props.appointmentsList[index])
+        }
+
         return (
             <MuiThemeProvider theme={theme}>
                 <Paper>
                     <Scheduler
-                        data={this.props.appointmentsList}
+                        data={apData}
                         maxHeight={630}
                         locale={locale}
                     >
@@ -260,7 +284,7 @@ class AppointmentsComp extends React.Component {
                         <AppointmentTooltip
                             showOpenButton
                             showCloseButton
-                        // showDeleteButton
+                            showDeleteButton
                         />
                         <AppointmentForm
                             overlayComponent={this.appointmentForm}
@@ -323,9 +347,9 @@ const mapStateToProps = state => ({
     locale: state.i18n.locale,
     appointmentsList: state.appointments.appointmentsList,
     patientList: state.patients.patientList,
-    // errors: state.errors
+    errors: state.errors
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getAllAppointments, createAppointment }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ getAllAppointments, createAppointment, updateAppointment, deleteAppointment }, dispatch)
 
 export default AuthRequired(withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(AppointmentsComp))))

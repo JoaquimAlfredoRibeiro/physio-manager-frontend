@@ -42,7 +42,7 @@ export function createAppointment(appointment) {
             })
             .then(response => this.getAllAppointments())
             //success message
-            .then(response => { toastr.success(I18n.t('toastr.sucess'), I18n.t('appointments.addAppointmentSuccess')) })
+            .then(response => { toastr.success(I18n.t('toastr.success'), I18n.t('appointments.addAppointmentSuccess')) })
             .catch(e => {
                 //if error message is ApiResponse
                 if (_.get(e, ['response', 'data', 'message'], false)) {
@@ -64,79 +64,65 @@ export function createAppointment(appointment) {
     }
 }
 
-// export function updatePathology(pathology) {
-//     return dispatch => {
-//         axios.put(`${BASE_URL}/${pathology.id}`, pathology)
-//             .then(response => {
-//                 dispatch([
-//                     {
-//                         type: PathologiesActionTypes.UPDATE_PATHOLOGY,
-//                     }
-//                 ])
-//             })
-//             .then(response => this.getAllPathologies())
-//             //success message
-//             .then(response => { toastr.success(I18n.t('toastr.sucess'), I18n.t('pathologies.editPathologySuccess')) })
-//             .catch(e => {
-//                 //if error message is ApiResponse
-//                 if (_.get(e, ['response', 'data', 'message'], false)) {
-//                     dispatch({
-//                         type: PathologiesActionTypes.GET_ERRORS,
-//                         payload: {}
-//                     });
-//                     toastr.error(I18n.t('toastr.error'), e.response.data.message)
-//                     //if error message is provided by Spring Valid
-//                 } else if (_.get(e, ['response', 'data'], false)) {
-//                     dispatch({
-//                         type: PathologiesActionTypes.GET_ERRORS,
-//                         payload: e.response.data
-//                     });
-//                 } else {
-//                     toastr.error(I18n.t('toastr.error'), e.message)
-//                 }
-//             });
-//     }
-// }
+export function updateAppointment(appointment) {
+    return dispatch => {
+        axios.put(`${BASE_URL}/${appointment.id}`, appointment)
+            .then(response => {
+                dispatch([
+                    {
+                        type: AppointmentsActionTypes.UPDATE_APPOINTMENT,
+                    }
+                ])
+            })
+            .then(response => this.getAllAppointments())
+            //success message
+            .then(response => { toastr.success(I18n.t('toastr.success'), I18n.t('appointments.editAppointmentSuccess')) })
+            .catch(e => {
+                //if error message is ApiResponse
+                if (_.get(e, ['response', 'data', 'message'], false)) {
+                    dispatch({
+                        type: AppointmentsActionTypes.GET_ERRORS,
+                        payload: {}
+                    });
+                    toastr.error(I18n.t('toastr.error'), e.response.data.message)
+                    //if error message is provided by Spring Valid
+                } else if (_.get(e, ['response', 'data'], false)) {
+                    dispatch({
+                        type: AppointmentsActionTypes.GET_ERRORS,
+                        payload: e.response.data
+                    });
+                } else {
+                    toastr.error(I18n.t('toastr.error'), e.message)
+                }
+            });
+    }
+}
 
-// export function deletePathology(id) {
-//     return dispatch => {
-//         axios.delete(`${BASE_URL}/${id}`)
-//             .then(response => {
-//                 dispatch([
-//                     {
-//                         type: PathologiesActionTypes.DELETE_PATHOLOGY,
-//                         payload: response
-//                     }
-//                 ])
-//             })
-//             .then(response => this.getAllPathologies())
-//             .catch(e => {
-//                 if (_.get(e, ['response', 'data', 'message'], false)) {
-//                     toastr.error(I18n.t('toastr.error'), I18n.t(`toastr.${e.response.data.message}`))
-//                 } else {
-//                     toastr.error(I18n.t('toastr.error'), e.message)
-//                 }
-//             })
-//     }
-// }
+export function deleteAppointment(id) {
+    return dispatch => {
+        axios.delete(`${BASE_URL}/${id}`)
+            .then(response => {
+                dispatch([
+                    {
+                        type: AppointmentsActionTypes.DELETE_APPOINTMENT,
+                        payload: response
+                    }
+                ])
+            })
+            .then(response => this.getAllAppointments())
+            .catch(e => {
+                if (_.get(e, ['response', 'data', 'message'], false)) {
+                    toastr.error(I18n.t('toastr.error'), I18n.t(`toastr.${e.response.data.message}`))
+                } else {
+                    toastr.error(I18n.t('toastr.error'), e.message)
+                }
+            })
+    }
+}
 
-// export function setShowPathologyDialog(state) {
-//     return {
-//         type: PathologiesActionTypes.SET_SHOW_PATHOLOGY_DIALOG,
-//         payload: state
-//     }
-// }
-
-// export function clearData() {
-//     return {
-//         type: PathologiesActionTypes.CLEAR_DATA,
-//         payload: {}
-//     }
-// }
-
-// export function clearErrors() {
-//     return {
-//         type: PathologiesActionTypes.CLEAR_ERRORS,
-//         payload: {}
-//     }
-// }
+export function clearData() {
+    return {
+        type: AppointmentsActionTypes.CLEAR_DATA,
+        payload: {}
+    }
+}
