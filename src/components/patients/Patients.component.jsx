@@ -185,7 +185,6 @@ class Patients extends React.Component {
             <div className={classes.root}>
                 <TableTitle text='patients.patientList' />
                 <MaterialTable
-                    // title={<Typography variant='h5'><Translate value='patients.patientList' /></Typography>}
                     title=''
                     columns={
                         [

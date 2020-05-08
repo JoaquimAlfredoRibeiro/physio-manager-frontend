@@ -13,7 +13,7 @@ export default function CardTitle(props) {
             color: '#FFF',
             borderRadius: '5px',
             padding: '7px 15px',
-            marginTop: '-35px',
+            marginTop: props.marginTop,
             position: 'absolute',
             zIndex: 1,
         }}>

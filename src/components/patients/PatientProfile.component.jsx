@@ -46,8 +46,8 @@ class PatientProfile extends React.Component {
 
         return (
             <div className={classes.root}>
-                <Grid container spacing={3}>
-                    <Grid item xs={4}>
+                <Grid container spacing={2}>
+                    <Grid item xs={3}>
                         <Paper className={classes.paper}>
                             <Card style={{
                                 boxShadow: '0 10px 35px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)',
@@ -67,38 +67,57 @@ class PatientProfile extends React.Component {
                             <TextFieldDisplay marginTop='5px' label="patients.address" value="Rua das biscainhas 123 4150 Porto" />
                         </Paper>
                     </Grid>
-                    <Grid item xs={4}>
-                        <Paper className={classes.paper}>
-                            <CardTitle text='tabs.pathologies' />
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
+                    <Grid item xs={6}>
+                        <Paper className={classes.tablePaper}>
+                            <CardTitle marginTop='-19px' text='tabs.appointments' />
+                            <MaterialTable
+                                title=''
+                                columns={
+                                    [
+                                        { title: `${I18n.t('global.startDate')}`, field: 'startDate' },
+                                        { title: `${I18n.t('global.location')}`, field: 'location' },
+                                        { title: `${I18n.t('global.notes')}`, field: 'notes' }
+                                    ]}
+                                data={
+                                    [
+                                        { startDate: '05-08-2020 14:00', location: 'Casa Paciente', notes: 'Excelente tratamento' },
+                                        { startDate: '05-09-2020 14:00', location: 'Casa Paciente', notes: 'Tratamento de excelência' },
+                                        { startDate: '05-10-2020 14:00', location: 'Casa Paciente', notes: 'Tratamento de alta qualidade' }
+                                    ]
+                                    // patientList.patients.map(row => (
+                                    //     { id: `${row.id}`, fullName: `${row.fullName}`, phoneNumber: `${row.phoneNumber}`, email: `${row.email}`, address: `${row.address}`, }
+                                    // ))
+                                }
+                                options={{
+                                    search: false
+                                }}
+                                localization={{
+                                    pagination: {
+                                        labelDisplayedRows: `${I18n.t('table.displayedRows')}`,
+                                        labelRowsSelect: `${I18n.t('table.rows')}`,
+                                        firstTooltip: `${I18n.t('table.firstPage')}`,
+                                        previousTooltip: `${I18n.t('table.previousPage')}`,
+                                        lastTooltip: `${I18n.t('table.lastPage')}`,
+                                        nextTooltip: `${I18n.t('table.nextPage')}`,
+                                    },
+                                    header: {
+                                        actions: `${I18n.t('table.actions')}`
+                                    },
+                                    toolbar: {
+                                        searchPlaceholder: `${I18n.t('table.search')}`
+                                    },
+                                    body: {
+                                        emptyDataSourceMessage: `${I18n.t('table.emptyDataSourceMessage')}`
+                                    }
+                                }
+                                }
+                            >
+                            </MaterialTable >
                         </Paper>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                         <Paper className={classes.paper}>
-                            <CardTitle text='tabs.appointments' />
+                            <CardTitle marginTop='-35px' text='tabs.pathologies' />
                             <div>asdasd</div>
                             <div>asdasd</div>
                             <div>asdasd</div>
