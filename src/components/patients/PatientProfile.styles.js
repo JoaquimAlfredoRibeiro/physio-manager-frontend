@@ -16,4 +16,11 @@ export default theme => ({
     topspacing: {
         marginTop: '20px'
     },
+    listspacing: {
+        marginTop: '20px'
+    },
+    addButton: {
+        position: 'absolute',
+        right: theme.spacing(6),
+    },
 });

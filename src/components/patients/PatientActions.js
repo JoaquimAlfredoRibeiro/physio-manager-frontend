@@ -148,6 +148,13 @@ export function setShowPatientDialog(state) {
     }
 }
 
+export function setShowAddPathologyDialog(state) {
+    return {
+        type: PatientActionTypes.SET_SHOW_ADD_PATHOLOGY_DIALOG,
+        payload: state
+    }
+}
+
 export function setSelectedPatient(id) {
     return {
         type: PatientActionTypes.SET_SELECTED_PATIENT,

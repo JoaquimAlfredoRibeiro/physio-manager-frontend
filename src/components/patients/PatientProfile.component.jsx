@@ -11,27 +11,62 @@ import PatientProfileStyles from './PatientProfile.styles'
 import MaterialTable, { MTableHeader, MTableToolbar } from 'material-table';
 import AuthRequired from '../common/AuthRequired'
 
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-
 import _ from 'lodash'
 
-import { getPatientInfo } from './PatientActions'
-import { Button, Grid, Paper, Typography } from '@material-ui/core';
+import {
+    getPatientInfo,
+    setShowAddPathologyDialog
+} from './PatientActions'
+import {
+    Button,
+    Grid,
+    Paper,
+    Typography,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Checkbox,
+    TextField,
+    InputAdornment,
+    FormControl,
+    InputLabel,
+    Input
+} from '@material-ui/core';
 import CardTitle from '../common/CardTitle';
 import TextFieldDisplay from '../common/TextFieldDisplay';
-import ConfirmationDialog from '../common/ConfirmationDialog.component';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
+
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
+
+
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import ClearIcon from '@material-ui/icons/Clear';
+import Visibility from '@material-ui/icons/Visibility';
+
+
 
 const styles = PatientProfileStyles;
 const I18n = require('react-redux-i18n').I18n;
 
 class PatientProfile extends React.Component {
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            pathologies: [{ id: 1, name: "Knee Injury" }, { id: 2, name: "Elbow Injury" }],
+            allPathologies: [{ id: 3, name: "Arm Injury" }, { id: 4, name: "Head Injury" }, { id: 5, name: "Leg Injury" }],
+            pathologyFilter: ''
+        }
+    }
 
     static getDerivedStateFromProps(props, state) {
         if (props.selectedPatient) {
@@ -40,9 +75,33 @@ class PatientProfile extends React.Component {
         return null;
     }
 
+    addPathology = () => {
+        this.props.setShowAddPathologyDialog(true)
+    }
+
+    dialogClose = () => {
+        this.props.setShowAddPathologyDialog(false)
+    }
+
+    dialogSubmit = (e) => {
+        e.preventDefault();
+    }
+
+    handleChangeFilter = (e) => {
+        this.setState({
+            pathologyFilter: e.target.valueue
+        })
+    }
+
+    handleFilterClear = (e) => {
+        e.preventDefault();
+    }
+
     render() {
 
         const { classes } = this.props;
+
+        console.log(this.props)
 
         return (
             <div className={classes.root}>
@@ -55,7 +114,7 @@ class PatientProfile extends React.Component {
                             }}>
                                 <CardMedia
                                     style={{
-                                        height: 300
+                                        height: 250
                                     }}
                                     image="https://image.freepik.com/free-photo/beautiful-african-american-woman-face-smiling_33839-3491.jpg"
                                     title="Contemplative Reptile"
@@ -69,7 +128,7 @@ class PatientProfile extends React.Component {
                     </Grid>
                     <Grid item xs={6}>
                         <Paper className={classes.tablePaper}>
-                            <CardTitle marginTop='-19px' text='tabs.appointments' />
+                            <CardTitle marginTop='-19px' marginLeft='16px' text='tabs.appointments' />
                             <MaterialTable
                                 title=''
                                 columns={
@@ -118,37 +177,38 @@ class PatientProfile extends React.Component {
                     <Grid item xs={3}>
                         <Paper className={classes.paper}>
                             <CardTitle marginTop='-35px' text='tabs.pathologies' />
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
+                            <List className={classes.listspacing}>
+
+                                {this.state.pathologies.map(pathology => {
+                                    return (
+                                        <ListItem key={pathology.id}>
+                                            <ListItemText primary={pathology.name} />
+                                            <ListItemSecondaryAction>
+                                                <IconButton edge="end" aria-label="delete">
+                                                    <DeleteIcon />
+                                                </IconButton>
+                                            </ListItemSecondaryAction>
+                                        </ListItem>
+                                    )
+                                })}
+                            </List>
+                            <div>
+                                <Fab
+                                    color="secondary"
+                                    size='small'
+                                    className={classes.addButton}
+                                    onClick={() => this.addPathology()}
+                                >
+                                    <AddIcon />
+                                </Fab>
+                            </div>
                         </Paper>
                     </Grid>
                 </Grid>
                 <Grid container className={classes.topspacing} spacing={3}>
                     <Grid item xs>
                         <Paper className={classes.paper}>
-                            <CardTitle text='patients.treatmentHistory' />
+                            <CardTitle marginTop='-35px' text='patients.treatmentHistory' />
                             <div>asdasd</div>
                             <div>asdasd</div>
                             <div>aasdasdasdasdsdasd</div>
@@ -176,6 +236,60 @@ class PatientProfile extends React.Component {
                         </Paper>
                     </Grid>
                 </Grid>
+
+                <Dialog open={this.props.showAddPathologyDialog} onClose={this.dialogClose} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">{I18n.t('patients.addPathologies')}</DialogTitle>
+                    <DialogContent style={{ width: "300px", marginTop: '-10px' }}>
+
+                        <FormControl styles={{ paddingLeft: '20px' }}>
+                            <InputLabel htmlFor="standard-adornment">
+                                Filter
+                            </InputLabel>
+                            <Input
+                                id="standard"
+                                type="text"
+                                default='Filter'
+                                value={this.state.pathologyFilter}
+                                onChange={this.handleChangeFilter}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={this.handleFilterClear}
+                                        >
+                                            <ClearIcon />
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                            />
+                        </FormControl>
+                        <List >
+                            {this.state.allPathologies.map(pathology => {
+                                return (
+                                    <ListItem key={pathology.id} button>
+                                        <ListItemText id={pathology.id} primary={pathology.name} />
+                                        <ListItemSecondaryAction>
+                                            <Checkbox
+                                                edge="end"
+                                                // onChange={handleToggle(pathology.id)}
+                                                // checked={checked.indexOf(pathology.id) !== -1}
+                                                inputProps={{ "aria-labelledby": pathology.id }}
+                                            />
+                                        </ListItemSecondaryAction>
+                                    </ListItem>
+                                )
+                            })}
+                        </List>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.dialogClose} color="primary">
+                            {I18n.t('global.cancel')}
+                        </Button>
+                        <Button onClick={this.dialogSubmit} color="primary">
+                            {I18n.t('global.submit')}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div >
         )
     }
@@ -188,8 +302,12 @@ PatientProfile.propTypes = {
 const mapStateToProps = state => ({
     patientInfo: state.patients.patientInfo,
     selectedPatient: state.patients.selectedPatient,
+    showAddPathologyDialog: state.patients.showAddPathologyDialog,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getPatientInfo }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({
+    getPatientInfo,
+    setShowAddPathologyDialog
+}, dispatch)
 
 export default AuthRequired(withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(PatientProfile))))

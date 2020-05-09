@@ -14,6 +14,7 @@ export default function CardTitle(props) {
             borderRadius: '5px',
             padding: '7px 15px',
             marginTop: props.marginTop,
+            marginLeft: props.marginLeft,
             position: 'absolute',
             zIndex: 1,
         }}>
