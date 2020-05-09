@@ -111,8 +111,6 @@ class PatientProfile extends React.Component {
 
         const { classes } = this.props;
 
-        console.log(this.props)
-
         return (
             <div className={classes.root}>
                 <Grid container spacing={2}>
@@ -231,7 +229,7 @@ class PatientProfile extends React.Component {
                                                     id="date-picker-dialog"
                                                     format="dd/MM/yyyy"
                                                     value={props.value}
-                                                    onChange={e => props.onChange(e.target.value)}
+                                                    onChange={e => props.onChange(e)}
                                                     KeyboardButtonProps={{
                                                         'aria-label': 'change date',
                                                     }}
@@ -259,7 +257,7 @@ class PatientProfile extends React.Component {
                                         new Promise((resolve, reject) => {
                                             setTimeout(() => {
                                                 {
-                                                    const data = this.state.data;
+                                                    const data = this.state.treatments;
                                                     data.push(newData);
                                                     this.setState({ data }, () => resolve());
                                                 }
@@ -270,8 +268,10 @@ class PatientProfile extends React.Component {
                                         new Promise((resolve, reject) => {
                                             setTimeout(() => {
                                                 {
-                                                    const data = this.state.data;
+                                                    const data = this.state.treatments;
                                                     const index = data.indexOf(oldData);
+                                                    console.log(data[index])
+                                                    console.log(newData)
                                                     data[index] = newData;
                                                     this.setState({ data }, () => resolve());
                                                 }
@@ -282,7 +282,7 @@ class PatientProfile extends React.Component {
                                         new Promise((resolve, reject) => {
                                             setTimeout(() => {
                                                 {
-                                                    let data = this.state.data;
+                                                    let data = this.state.treatments;
                                                     const index = data.indexOf(oldData);
                                                     data.splice(index, 1);
                                                     this.setState({ data }, () => resolve());
