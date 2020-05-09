@@ -23,4 +23,8 @@ export default theme => ({
         position: 'absolute',
         right: theme.spacing(6),
     },
+    form: {
+        marginLeft: '12px',
+        marginRight: '0px'
+    },
 });

@@ -241,7 +241,7 @@ class PatientProfile extends React.Component {
                     <DialogTitle id="form-dialog-title">{I18n.t('patients.addPathologies')}</DialogTitle>
                     <DialogContent style={{ width: "300px", marginTop: '-10px' }}>
 
-                        <FormControl styles={{ paddingLeft: '20px' }}>
+                        <FormControl className={classes.form}>
                             <InputLabel htmlFor="standard-adornment">
                                 Filter
                             </InputLabel>
@@ -252,7 +252,7 @@ class PatientProfile extends React.Component {
                                 value={this.state.pathologyFilter}
                                 onChange={this.handleChangeFilter}
                                 endAdornment={
-                                    <InputAdornment position="end">
+                                    <InputAdornment position="end" >
                                         <IconButton
                                             aria-label="toggle password visibility"
                                             onClick={this.handleFilterClear}

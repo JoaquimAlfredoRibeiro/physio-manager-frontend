@@ -73,7 +73,6 @@ class Patients extends React.Component {
         })
     }
 
-
     newPatient = () => {
 
         this.setState({
