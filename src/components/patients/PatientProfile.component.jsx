@@ -33,6 +33,12 @@ import {
     InputLabel,
     Input
 } from '@material-ui/core';
+import {
+    MuiPickersUtilsProvider,
+    KeyboardDatePicker,
+} from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
+
 import CardTitle from '../common/CardTitle';
 import TextFieldDisplay from '../common/TextFieldDisplay';
 import Card from '@material-ui/core/Card';
@@ -49,7 +55,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import ClearIcon from '@material-ui/icons/Clear';
-import Visibility from '@material-ui/icons/Visibility';
 
 
 
@@ -64,7 +69,7 @@ class PatientProfile extends React.Component {
         this.state = {
             pathologies: [{ id: 1, name: "Knee Injury" }, { id: 2, name: "Elbow Injury" }],
             allPathologies: [{ id: 3, name: "Arm Injury" }, { id: 4, name: "Head Injury" }, { id: 5, name: "Leg Injury" }],
-            treatments: [{ id: 1, startDate: "05-08-2020 14:00", treatment: "Tratamento tal, após identificar a maleita coiso" }, { id: 1, startDate: "05-09-2020 14:00", treatment: "Foi chegar, ver e vencer" }, { id: 1, startDate: "05-10-2020 14:00", treatment: "Consulta de manutenção" }],
+            treatments: [{ id: 1, startDate: "05/08/2020", treatment: "Tratamento tal, após identificar a maleita coiso" }, { id: 1, startDate: "05/09/2020", treatment: "Foi chegar, ver e vencer" }, { id: 1, startDate: "05/10/2020", treatment: "Consulta de manutenção" }],
             pathologyFilter: ''
         }
     }
@@ -215,51 +220,78 @@ class PatientProfile extends React.Component {
                         <Paper className={classes.tablePaper}>
                             <CardTitle marginTop='-19px' marginLeft='16px' text='patients.treatmentHistory' />
                             <MaterialTable
-                                title=''
-                                columns={
-                                    [
-                                        {
-                                            title: `${I18n.t('global.startDate')}`, field: 'startDate', width: 200
-                                        },
-                                        {
-                                            title: `${I18n.t('global.treatment')}`, field: 'treatment'
-                                        },
-                                    ]}
-                                data={
-                                    this.state.treatments.map(row => (
-                                        { id: `${row.id}`, startDate: `${row.startDate}`, treatment: `${row.treatment}` }
-                                    ))
-                                }
-                                actions={
-                                    [
-                                        {
-                                            icon: 'edit',
-                                            tooltip: `${I18n.t('patients.editTreatment')}`,
-                                            onClick: (event, row) => this.editTreatment(row)
-                                        }
-                                    ]}
-                                localization={{
-                                    pagination: {
-                                        labelDisplayedRows: `${I18n.t('table.displayedRows')}`,
-                                        labelRowsSelect: `${I18n.t('table.rows')}`,
-                                        firstTooltip: `${I18n.t('table.firstPage')}`,
-                                        previousTooltip: `${I18n.t('table.previousPage')}`,
-                                        lastTooltip: `${I18n.t('table.lastPage')}`,
-                                        nextTooltip: `${I18n.t('table.nextPage')}`,
+                                title=""
+                                columns={[
+                                    {
+                                        title: I18n.t('global.startDate'), field: 'startDate', width: 180,
+                                        editComponent: props => (
+                                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                                <KeyboardDatePicker
+                                                    margin="normal"
+                                                    id="date-picker-dialog"
+                                                    format="dd/MM/yyyy"
+                                                    value={props.value}
+                                                    onChange={e => props.onChange(e.target.value)}
+                                                    KeyboardButtonProps={{
+                                                        'aria-label': 'change date',
+                                                    }}
+                                                />
+                                            </MuiPickersUtilsProvider>
+                                        )
                                     },
-                                    header: {
-                                        actions: `${I18n.t('table.actions')}`
-                                    },
-                                    toolbar: {
-                                        searchPlaceholder: `${I18n.t('table.search')}`
-                                    },
-                                    body: {
-                                        emptyDataSourceMessage: `${I18n.t('table.emptyDataSourceMessage')}`
+                                    {
+                                        title: I18n.t('global.treatment'), field: 'treatment', editComponent: props => (
+                                            <TextField
+                                                variant="standard"
+                                                margin="normal"
+                                                fullWidth
+                                                id="treatment"
+                                                name="treatment"
+                                                value={props.value}
+                                                onChange={e => props.onChange(e.target.value)}
+                                            />
+                                        )
                                     }
-                                }
-                                }
-                            >
-                            </MaterialTable >
+                                ]}
+                                data={this.state.treatments}
+                                editable={{
+                                    onRowAdd: newData =>
+                                        new Promise((resolve, reject) => {
+                                            setTimeout(() => {
+                                                {
+                                                    const data = this.state.data;
+                                                    data.push(newData);
+                                                    this.setState({ data }, () => resolve());
+                                                }
+                                                resolve()
+                                            }, 1000)
+                                        }),
+                                    onRowUpdate: (newData, oldData) =>
+                                        new Promise((resolve, reject) => {
+                                            setTimeout(() => {
+                                                {
+                                                    const data = this.state.data;
+                                                    const index = data.indexOf(oldData);
+                                                    data[index] = newData;
+                                                    this.setState({ data }, () => resolve());
+                                                }
+                                                resolve()
+                                            }, 1000)
+                                        }),
+                                    onRowDelete: oldData =>
+                                        new Promise((resolve, reject) => {
+                                            setTimeout(() => {
+                                                {
+                                                    let data = this.state.data;
+                                                    const index = data.indexOf(oldData);
+                                                    data.splice(index, 1);
+                                                    this.setState({ data }, () => resolve());
+                                                }
+                                                resolve()
+                                            }, 1000)
+                                        }),
+                                }}
+                            />
                         </Paper>
                     </Grid>
                 </Grid>
