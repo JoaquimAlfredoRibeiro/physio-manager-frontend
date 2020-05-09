@@ -63,7 +63,7 @@ export function createPatient(patient) {
             })
             .then(response => this.getAllPatients())
             //success message
-            .then(response => { toastr.success(I18n.t('toastr.sucess'), I18n.t('patients.addPatientSuccess')) })
+            .then(response => { toastr.success(I18n.t('toastr.success'), I18n.t('patients.addPatientSuccess')) })
             .catch(e => {
                 //if error message is ApiResponse
                 if (_.get(e, ['response', 'data', 'message'], false)) {
@@ -97,7 +97,7 @@ export function updatePatient(patient) {
             })
             .then(response => this.getAllPatients())
             //success message
-            .then(response => { toastr.success(I18n.t('toastr.sucess'), I18n.t('patients.editPatientSuccess')) })
+            .then(response => { toastr.success(I18n.t('toastr.success'), I18n.t('patients.editPatientSuccess')) })
             .catch(e => {
                 //if error message is ApiResponse
                 if (_.get(e, ['response', 'data', 'message'], false)) {

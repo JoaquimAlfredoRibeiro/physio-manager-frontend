@@ -18,7 +18,8 @@
     "save": "Save",
     "delete": "Delete",
     "profile": "Profile",
-    "filter": "Filter"
+    "filter": "Filter",
+    "treatment": "Treatment"
   },
   "app": {
     "name": "Physio Manager"
@@ -102,7 +103,8 @@
     "deletePacientConfirmation": "Are you sure you want to delete the pacient?",
     "viewProfile": "View Profile",
     "treatmentHistory": "Treatment History",
-    "addPathologies": "Add Pathologies"
+    "addPathologies": "Add Pathologies",
+    "editTreatment": "Edit Treatment"
   },
   "appointments": {
     "patientPicker": "Patient",

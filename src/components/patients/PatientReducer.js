@@ -1,6 +1,6 @@
 import PatientActionTypes from "./PatientActionTypes";
 
-const INITIAL_STATE = { patientList: [], patientInfo: {}, showPatientDialog: false, showAddPathologyDialog: true, selectedPatient: -1 }
+const INITIAL_STATE = { patientList: [], patientInfo: {}, showPatientDialog: false, showAddPathologyDialog: false, selectedPatient: -1 }
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {

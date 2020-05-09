@@ -64,6 +64,7 @@ class PatientProfile extends React.Component {
         this.state = {
             pathologies: [{ id: 1, name: "Knee Injury" }, { id: 2, name: "Elbow Injury" }],
             allPathologies: [{ id: 3, name: "Arm Injury" }, { id: 4, name: "Head Injury" }, { id: 5, name: "Leg Injury" }],
+            treatments: [{ id: 1, startDate: "05-08-2020 14:00", treatment: "Tratamento tal, após identificar a maleita coiso" }, { id: 1, startDate: "05-09-2020 14:00", treatment: "Foi chegar, ver e vencer" }, { id: 1, startDate: "05-10-2020 14:00", treatment: "Consulta de manutenção" }],
             pathologyFilter: ''
         }
     }
@@ -94,6 +95,10 @@ class PatientProfile extends React.Component {
     }
 
     handleFilterClear = (e) => {
+        e.preventDefault();
+    }
+
+    editTreatment = (e) => {
         e.preventDefault();
     }
 
@@ -207,32 +212,54 @@ class PatientProfile extends React.Component {
                 </Grid>
                 <Grid container className={classes.topspacing} spacing={3}>
                     <Grid item xs>
-                        <Paper className={classes.paper}>
-                            <CardTitle marginTop='-35px' text='patients.treatmentHistory' />
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>aasdasdasdasdsdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
-                            <div>asdasd</div>
+                        <Paper className={classes.tablePaper}>
+                            <CardTitle marginTop='-19px' marginLeft='16px' text='patients.treatmentHistory' />
+                            <MaterialTable
+                                title=''
+                                columns={
+                                    [
+                                        {
+                                            title: `${I18n.t('global.startDate')}`, field: 'startDate', width: 200
+                                        },
+                                        {
+                                            title: `${I18n.t('global.treatment')}`, field: 'treatment'
+                                        },
+                                    ]}
+                                data={
+                                    this.state.treatments.map(row => (
+                                        { id: `${row.id}`, startDate: `${row.startDate}`, treatment: `${row.treatment}` }
+                                    ))
+                                }
+                                actions={
+                                    [
+                                        {
+                                            icon: 'edit',
+                                            tooltip: `${I18n.t('patients.editTreatment')}`,
+                                            onClick: (event, row) => this.editTreatment(row)
+                                        }
+                                    ]}
+                                localization={{
+                                    pagination: {
+                                        labelDisplayedRows: `${I18n.t('table.displayedRows')}`,
+                                        labelRowsSelect: `${I18n.t('table.rows')}`,
+                                        firstTooltip: `${I18n.t('table.firstPage')}`,
+                                        previousTooltip: `${I18n.t('table.previousPage')}`,
+                                        lastTooltip: `${I18n.t('table.lastPage')}`,
+                                        nextTooltip: `${I18n.t('table.nextPage')}`,
+                                    },
+                                    header: {
+                                        actions: `${I18n.t('table.actions')}`
+                                    },
+                                    toolbar: {
+                                        searchPlaceholder: `${I18n.t('table.search')}`
+                                    },
+                                    body: {
+                                        emptyDataSourceMessage: `${I18n.t('table.emptyDataSourceMessage')}`
+                                    }
+                                }
+                                }
+                            >
+                            </MaterialTable >
                         </Paper>
                     </Grid>
                 </Grid>

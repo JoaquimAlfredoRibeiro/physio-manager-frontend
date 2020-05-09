@@ -27,7 +27,7 @@ export const registerUser = (user) => dispatch => {
             }
         )
         //success message
-        .then(response => { toastr.success(I18n.t('toastr.sucess'), I18n.t('login.signupSuccess')) })
+        .then(response => { toastr.success(I18n.t('toastr.success'), I18n.t('login.signupSuccess')) })
         .catch(e => {
             //if error message is ApiResponse
             if (_.get(e, ['response', 'data', 'message'], false)) {
@@ -58,7 +58,7 @@ export const loginUser = (user, history) => dispatch => {
             dispatch(setCurrentUser(decoded));
         })
         //success message
-        .then(response => { toastr.success(I18n.t('toastr.sucess'), I18n.t('login.signinSuccess')) })
+        .then(response => { toastr.success(I18n.t('toastr.success'), I18n.t('login.signinSuccess')) })
         .then(response => { history.push('/dashboard'); })
         .catch(e => {
             //if error message is ApiResponse
