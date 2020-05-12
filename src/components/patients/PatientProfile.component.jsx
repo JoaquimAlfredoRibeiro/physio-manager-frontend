@@ -31,7 +31,15 @@ import {
     InputAdornment,
     FormControl,
     InputLabel,
-    Input
+    Input,
+    Card,
+    CardMedia,
+    List,
+    ListItem,
+    ListItemSecondaryAction,
+    ListItemText,
+    IconButton,
+    Fab
 } from '@material-ui/core';
 import {
     MuiPickersUtilsProvider,
@@ -41,18 +49,8 @@ import DateFnsUtils from '@date-io/date-fns';
 
 import CardTitle from '../common/CardTitle';
 import TextFieldDisplay from '../common/TextFieldDisplay';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
 
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
-
-
-import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import ClearIcon from '@material-ui/icons/Clear';
 
@@ -67,6 +65,11 @@ class PatientProfile extends React.Component {
         super(props)
 
         this.state = {
+            id: '',
+            fullName: '',
+            email: '',
+            address: '',
+            phoneNumber: '',
             pathologies: [{ id: 1, name: "Knee Injury" }, { id: 2, name: "Elbow Injury" }],
             allPathologies: [{ id: 3, name: "Arm Injury" }, { id: 4, name: "Head Injury" }, { id: 5, name: "Leg Injury" }],
             treatments: [{ id: 1, startDate: "05/08/2020", treatment: "Tratamento tal, após identificar a maleita coiso" }, { id: 1, startDate: "05/09/2020", treatment: "Foi chegar, ver e vencer" }, { id: 1, startDate: "05/10/2020", treatment: "Consulta de manutenção" }],
@@ -75,9 +78,20 @@ class PatientProfile extends React.Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        if (props.selectedPatient) {
+        if (props.selectedPatient && props.selectedPatient > 0) {
             props.getPatientInfo(props.selectedPatient)
         }
+
+        if (props.patientInfo && props.patientInfo.id !== state.id) {
+            return {
+                id: props.patientInfo.id,
+                fullName: props.patientInfo.fullName,
+                email: props.patientInfo.email,
+                address: props.patientInfo.address,
+                phoneNumber: props.patientInfo.phoneNumber,
+            }
+        }
+
         return null;
     }
 
@@ -128,10 +142,10 @@ class PatientProfile extends React.Component {
                                     title="Contemplative Reptile"
                                 />
                             </Card>
-                            <TextFieldDisplay marginTop='20px' label="patients.fullName" value="João Manuel Silva" />
-                            <TextFieldDisplay marginTop='5px' label="patients.phoneNumber" value="912370701" />
-                            <TextFieldDisplay marginTop='5px' label="patients.email" value="myemail@gmail.com" />
-                            <TextFieldDisplay marginTop='5px' label="patients.address" value="Rua das biscainhas 123 4150 Porto" />
+                            <TextFieldDisplay marginTop='20px' label="patients.fullName" value={this.state.fullName} />
+                            <TextFieldDisplay marginTop='5px' label="patients.phoneNumber" value={this.state.phoneNumber} />
+                            <TextFieldDisplay marginTop='5px' label="patients.email" value={this.state.email} />
+                            <TextFieldDisplay marginTop='5px' label="patients.address" value={this.state.address} />
                         </Paper>
                     </Grid>
                     <Grid item xs={6}>

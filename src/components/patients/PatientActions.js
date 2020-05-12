@@ -32,11 +32,11 @@ export function getAllPatients() {
 
 export function getPatientInfo(id) {
     return dispatch => {
-        axios.get(`${BASE_URL}`)
+        axios.get(`${BASE_URL}/${id}`)
             .then(response => {
                 dispatch([
                     {
-                        type: PatientActionTypes.GET_ALL_PATIENTS,
+                        type: PatientActionTypes.GET_PATIENT_BY_ID,
                         payload: response
                     }
                 ])

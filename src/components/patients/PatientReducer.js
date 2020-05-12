@@ -1,6 +1,12 @@
 import PatientActionTypes from "./PatientActionTypes";
 
-const INITIAL_STATE = { patientList: [], patientInfo: {}, showPatientDialog: false, showAddPathologyDialog: false, selectedPatient: -1 }
+const INITIAL_STATE = {
+    patientList: [],
+    patientInfo: {},
+    showPatientDialog: false,
+    showAddPathologyDialog: false,
+    selectedPatient: -1
+}
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
@@ -37,6 +43,11 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 selectedPatient: action.payload
+            }
+        case PatientActionTypes.GET_PATIENT_BY_ID:
+            return {
+                ...state,
+                patientInfo: action.payload.data
             }
         case PatientActionTypes.CLEAR_DATA:
             return {
