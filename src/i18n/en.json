@@ -86,7 +86,8 @@
     "logout": "Logout"
   },
   "dashboard": {
-    "welcome": "Welcome"
+    "welcome": "Welcome",
+    "todaysAppointments": "Today's Appointments"
   },
   "patients": {
     "patientList": "Patients List",

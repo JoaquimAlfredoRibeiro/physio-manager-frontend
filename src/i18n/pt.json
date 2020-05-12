@@ -86,7 +86,8 @@
     "logout": "Sair"
   },
   "dashboard": {
-    "welcome": "Bem-vindo"
+    "welcome": "Bem-vindo",
+    "todaysAppointments": "Marcações de hoje"
   },
   "patients": {
     "patientList": "Lista de Pacientes",
