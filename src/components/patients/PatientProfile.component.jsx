@@ -78,7 +78,7 @@ class PatientProfile extends React.Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        if (props.selectedPatient && props.selectedPatient > 0) {
+        if (props.selectedPatient && props.selectedPatient > 0 && props.selectedPatient != state.id) {
             props.getPatientInfo(props.selectedPatient)
         }
 
@@ -93,6 +93,29 @@ class PatientProfile extends React.Component {
         }
 
         return null;
+    }
+
+    getPhoto = () => {
+        switch (this.state.id) {
+            case 13:
+                return 'https://media.istockphoto.com/photos/mature-mixed-race-man-smiling-picture-id825083248?k=6&m=825083248&s=612x612&w=0&h=5INx9_oQUM2euqhKmMWdpbLHu2ET2AcZ8cAj1_IdxWk='
+                break;
+            case 14:
+                return 'https://fixthephoto.com/blog/UserFiles/self-portrait-photography-free-photoshop-action-smooth-skin-before.jpg'
+                break;
+            case 17:
+                return 'https://image.freepik.com/free-photo/beautiful-african-american-woman-face-smiling_33839-3491.jpg'
+                break;
+            case 19:
+                return 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg'
+                break;
+            case 20:
+                return 'https://image.freepik.com/free-photo/young-asian-girl-portrait-isolated_53876-70968.jpg'
+                break;
+            default:
+                return ''
+                break;
+        }
     }
 
     addPathology = () => {
@@ -125,6 +148,8 @@ class PatientProfile extends React.Component {
 
         const { classes } = this.props;
 
+        console.log('render me timbers')
+
         return (
             <div className={classes.root}>
                 <Grid container spacing={2}>
@@ -138,7 +163,7 @@ class PatientProfile extends React.Component {
                                     style={{
                                         height: 250
                                     }}
-                                    image="https://image.freepik.com/free-photo/beautiful-african-american-woman-face-smiling_33839-3491.jpg"
+                                    image={this.getPhoto()}
                                     title="Contemplative Reptile"
                                 />
                             </Card>

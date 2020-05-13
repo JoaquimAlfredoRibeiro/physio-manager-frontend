@@ -30,16 +30,11 @@ class Dashboard extends React.Component {
 
         this.state = {
             appointments: [
-                { id: '14', fullName: 'asd', startTime: '01:00', location: 'Rua do coiso', img: 'https://image.freepik.com/free-photo/beautiful-african-american-woman-face-smiling_33839-3491.jpg' },
-                { id: '2', fullName: 'asd', startTime: '02:00', location: 'Rua do coiso', img: 'https://image.freepik.com/free-photo/beautiful-african-american-woman-face-smiling_33839-3491.jpg' },
-                { id: '3', fullName: 'asd', startTime: '03:00', location: 'Rua do coiso', img: 'https://image.freepik.com/free-photo/beautiful-african-american-woman-face-smiling_33839-3491.jpg' },
-                { id: '4', fullName: 'asd', startTime: '04:00', location: 'Rua do coiso', img: 'https://image.freepik.com/free-photo/beautiful-african-american-woman-face-smiling_33839-3491.jpg' },
-                { id: '5', fullName: 'asd', startTime: '05:00', location: 'Rua do coiso', img: 'https://image.freepik.com/free-photo/beautiful-african-american-woman-face-smiling_33839-3491.jpg' },
-                { id: '6', fullName: 'asd', startTime: '06:00', location: 'Rua do coiso', img: 'https://image.freepik.com/free-photo/beautiful-african-american-woman-face-smiling_33839-3491.jpg' },
-                { id: '7', fullName: 'asd', startTime: '07:00', location: 'Rua do coiso', img: 'https://image.freepik.com/free-photo/beautiful-african-american-woman-face-smiling_33839-3491.jpg' },
-                { id: '8', fullName: 'asd', startTime: '08:00', location: 'Rua do coiso', img: 'https://image.freepik.com/free-photo/beautiful-african-american-woman-face-smiling_33839-3491.jpg' },
-                { id: '9', fullName: 'asd', startTime: '09:00', location: 'Rua do coiso', img: 'https://image.freepik.com/free-photo/beautiful-african-american-woman-face-smiling_33839-3491.jpg' },
-                { id: '10', fullName: 'asd', startTime: '10:00', location: 'Rua do coiso', img: 'https://image.freepik.com/free-photo/beautiful-african-american-woman-face-smiling_33839-3491.jpg' },
+                { id: '13', fullName: 'Luis de Camarõess', startTime: '10:00', location: 'Barraca 74, 1548-585 Praia da Barrouca', img: 'https://media.istockphoto.com/photos/mature-mixed-race-man-smiling-picture-id825083248?k=6&m=825083248&s=612x612&w=0&h=5INx9_oQUM2euqhKmMWdpbLHu2ET2AcZ8cAj1_IdxWk=' },
+                { id: '14', fullName: 'Cristina Maria Filipa Ferreiras', startTime: '11:00', location: 'Rua dos Pinheiros Velhos 12, 2000-200 Pinheiral Bravio', img: 'https://fixthephoto.com/blog/UserFiles/self-portrait-photography-free-photoshop-action-smooth-skin-before.jpg' },
+                { id: '17', fullName: 'Mariana Maria Ana Antunes', startTime: '14:30', location: 'Rua da Caneta 2º Esquerdo,  4575-828  Porto', img: 'https://image.freepik.com/free-photo/beautiful-african-american-woman-face-smiling_33839-3491.jpg' },
+                { id: '19', fullName: 'Mário António', startTime: '16:00', location: 'Rua da Estrela 3º F, 1234-452 Reino do Cogumelo', img: 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg' },
+                { id: '20', fullName: 'Joana Manuela', startTime: '17:30', location: 'Rua da Universidade 77, 4785-302 Aveiro', img: 'https://image.freepik.com/free-photo/young-asian-girl-portrait-isolated_53876-70968.jpg' },
             ],
         }
     }
